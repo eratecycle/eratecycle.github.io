@@ -118,6 +118,10 @@ fieldset[disabled] .btn-primary.active {
     background-color: #fff;
 }
 
+.nav .btn {
+  border-color: #{{ site.color.primary }};
+}
+
 .btn-xl {
     padding: 20px 40px;
     border-color: #{{ site.color.primary }};
@@ -266,7 +270,7 @@ header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url(../img/header-bg.jpg);
+    background-image: url(../img/bg-header-1.jpg);
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
