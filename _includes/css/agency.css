@@ -279,7 +279,16 @@ header {
     -o-background-size: cover;
 }
 
+header.about-header {
+    background-image: url(../img/about/bg-header-small-1.jpg);
+}
+
 header .intro-text {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+header.about-header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px;
 }
@@ -304,6 +313,11 @@ header .intro-text .intro-heading {
 @media(min-width:768px) {
     header .intro-text {
         padding-top: 300px;
+        padding-bottom: 200px;
+    }
+
+    header.about-header .intro-text {
+        padding-top: 150px;
         padding-bottom: 200px;
     }
 
