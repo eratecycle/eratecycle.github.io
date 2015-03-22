@@ -1,0 +1,75 @@
+---
+layout: default
+---
+
+<!-- Header -->
+<div class="blog-header">
+  <div class="container">
+      <div class="intro-text">
+        <div class="intro-lead-in">News</div>
+        <div class="lead">What's happening at E-Rate Cycle`.</div>
+      </div>
+  </div>
+</div>
+<!-- /.blog-header -->
+
+<!-- Page Content -->
+{% for post in site.posts reversed %}
+  {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
+    {% if thecycle == 'odd' %}
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">
+                      <a href="{{ post.url }}">{{ post.title }}</a>
+                    </h2>
+                    <h4>{{post.subtitle}}</h4>
+                    <span class="lead">{{ post.excerpt }}</span>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                  <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
+                    <img class="img-responsive" src="/img/portfolio/{{ post.img }}" alt="">
+                  </a>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+    {% else %}
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">
+                      <a href="{{ post.url }}">{{ post.title }}</a>
+                    </h2>
+                    <h4>{{post.subtitle}}</h4>
+                    <span class="lead">{{ post.excerpt }}</span>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6 col-sm-6">
+                  <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
+                    <img class="img-responsive" src="/img/portfolio/{{ post.img }}" alt="">
+                  </a>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+    {% endif %}
+{% endfor %}
