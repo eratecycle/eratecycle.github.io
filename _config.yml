@@ -1,5 +1,13 @@
 url: http://eratecycle.github.io
 
+exclude: [
+  'node_modules',
+  'bower_components',
+  'package.json',
+  'bower.json',
+  'gulpfile.js'
+]
+
 # Site settings
 title: "E-Rate Cycle"
 email: your-email@domain.com
