@@ -20,10 +20,10 @@ gulp.task('jekyll', function (cb) {
 
 
 // Compile SASS
-gulp.task('sass', ['jekyll', 'bower'], function(cb) {
+gulp.task('sass', ['jekyll'], function() {
   return sass('_scss/styles.scss', { sourcemap: true })
     .pipe(gulp.dest('_site'))
-    .pipe(reload({ stream:true }, cb));
+    .pipe(reload({stream: true}));
 });
 
 gulp.task('bower', ['jekyll'], function(cb) {
@@ -36,7 +36,7 @@ gulp.task('bower', ['jekyll'], function(cb) {
 });
 
 // Run static file server
-gulp.task('serve', ['jekyll', 'sass', 'bower'], function() {
+gulp.task('serve', ['jekyll', 'bower', 'sass'], function() {
   browserSync({
     server: {
       baseDir: EXPRESS_ROOT,
@@ -48,12 +48,14 @@ gulp.task('serve', ['jekyll', 'sass', 'bower'], function() {
 // Watch for changes
 gulp.task('watch', function () {
     // Manually compile and inject css to avoid jekyll overhead, and utilize livereload injection
-    gulp.watch('_scss/*.scss', ['sass']);
+    gulp.watch('_scss/*.scss', ['jekyll', 'bower', 'sass']);
 
     // Watch for changes to other files for jekyll compilation
     // Note: This will probably need to be updated with the files you want to watch
     // Second Note: MAKE SURE that the last to items in the watchlist are included or else infinite jekyll loop
-    gulp.watch(['*.html', '*/*.html', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll', 'sass']);
+    gulp.watch(['*.html', '*/*.html', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll', 'bower', 'sass']);
+
+    gulp.watch('_site/*.html').on('change', reload);
 
 })
 
