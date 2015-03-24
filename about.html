@@ -2,16 +2,22 @@
 layout: default
 ---
 
-<!-- Header -->
-<header class="about-header">
-    <div class="container">
-        <div class="intro-text">
-          <div class="intro-lead-in">Our story, our value</div>
-          <div class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</div>
+<div data-page="about"/>
+<div id="inSlider" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption blank">
+                    <h1>Our story, our value</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <div class="header-back two"></div>
         </div>
     </div>
-</header>
-
+</div>
 {% include about.html %}
 {% include team.html %}
+{% include features-2.html %}
 {% include contact.html %}

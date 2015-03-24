@@ -2,17 +2,31 @@
 layout: default
 ---
 
-<!-- Header -->
-<header>
-    <div class="container">
-        <div class="intro-text">
-            <div class="intro-lead-in">The TurboTax for E-Rate!</div>
-            <div class="intro-heading">E-Rate Cycle</div>
-            <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+<div data-page="home"/>
+<div id="inSlider" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>We help with every</br>
+                    step of the E-Rate Cycle</h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                    <p>
+                        <a class="btn btn-lg btn-primary" href="#" role="button">READ MORE</a>
+                    </p>
+                </div>
+                <div class="carousel-image wow zoomIn">
+                    <img src="/img/laptop.png" alt="laptop"/>
+                </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <div class="header-back one"></div>
+
         </div>
     </div>
-</header>
+</div>
 
-{% include services.html %}
-{% include portfolio_grid.html %}
-{% include clients.html %}
+{% include features.html %}
+{% include pricing.html %}
+{% include features-3.html %}
+{% include testimonials.html %}
