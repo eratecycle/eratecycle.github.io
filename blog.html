@@ -21,55 +21,41 @@ layout: default
 {% for post in site.posts reversed %}
   {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
     {% if thecycle == 'odd' %}
-    <section>
-
+    <section class="features">
         <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">
-                      <a href="{{ post.url }}">{{ post.title }}</a>
-                    </h2>
-                    <h4>{{post.subtitle}}</h4>
-                    <span class="lead">{{ post.excerpt }}</span>
+            <div class="row features-block">
+                <div class="col-lg-8 features-text wow fadeInLeft">
+                    <h1>{{ post.title }}</h1>
+                    <p>{{ post.excerpt }}</p>
+                    <a href="" class="btn btn-primary">Learn more</a>
                 </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <div class="col-lg-4 features-text text-right wow fadeInRight">
                   <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
-                    <img class="img-responsive" src="/img/portfolio/{{ post.img }}" alt="">
+                    <img class="img-responsive" src="/img/blog/{{ post.thumbnail }}" alt="">
                   </a>
                 </div>
             </div>
-
         </div>
-        <!-- /.container -->
 
     </section>
     <!-- /.content-section-a -->
     {% else %}
 
-    <section class="gray-section">
+    <section class="features gray-section">
 
         <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">
-                      <a href="{{ post.url }}">{{ post.title }}</a>
-                    </h2>
-                    <h4>{{post.subtitle}}</h4>
-                    <span class="lead">{{ post.excerpt }}</span>
-                </div>
-                <div class="col-lg-5 col-sm-pull-6 col-sm-6">
-                  <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
-                    <img class="img-responsive" src="/img/portfolio/{{ post.img }}" alt="">
-                  </a>
-                </div>
-            </div>
-
+          <div class="row features-block">
+              <div class="col-lg-4 features-text text-left wow fadeInLeft">
+                <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
+                  <img class="img-responsive" src="/img/blog/{{ post.thumbnail }}" alt="">
+                </a>
+              </div>
+              <div class="col-lg-8 features-text wow fadeInRight">
+                  <h1>{{ post.title }}</h1>
+                  <p>{{ post.excerpt }}</p>
+                  <a href="" class="btn btn-primary">Learn more</a>
+              </div>
+          </div>
         </div>
         <!-- /.container -->
 
