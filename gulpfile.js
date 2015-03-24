@@ -9,34 +9,34 @@ var EXPRESS_ROOT = '_site/'
 
 
 // Run Jekyll Build Asynchronously
-gulp.task('jekyll', function (cb) {
+gulp.task('jekyll', ['sass', 'bower'], function () {
     var jekyll = spawn('jekyll', ['build']);
 
     jekyll.on('exit', function (code) {
         console.log('-- Finished Jekyll Build --');
-        cb();
+        reload();
     })
 });
 
 
 // Compile SASS
-gulp.task('sass', ['jekyll'], function() {
+gulp.task('sass', function(cb) {
   return sass('_scss/styles.scss', { sourcemap: true })
-    .pipe(gulp.dest('_site'))
-    .pipe(reload({stream: true}));
+    .pipe(gulp.dest('css'))
+    .pipe(reload({stream: true}, cb));
 });
 
-gulp.task('bower', ['jekyll'], function(cb) {
+gulp.task('bower', function(cb) {
   return gulp.src([
     'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
     'bower_components/fontawesome/fonts/*',
-    'bower_components/animate.css/*.css'
+    'bower_components/animate.css/animate.min.css'
   ], {base: '.'})
-  .pipe(gulp.dest('_site/css'), cb);
+  .pipe(gulp.dest('css'), cb);
 });
 
 // Run static file server
-gulp.task('serve', ['jekyll', 'bower', 'sass'], function() {
+gulp.task('serve', ['jekyll'], function() {
   browserSync({
     server: {
       baseDir: EXPRESS_ROOT,
@@ -48,16 +48,13 @@ gulp.task('serve', ['jekyll', 'bower', 'sass'], function() {
 // Watch for changes
 gulp.task('watch', function () {
     // Manually compile and inject css to avoid jekyll overhead, and utilize livereload injection
-    gulp.watch('_scss/*.scss', ['jekyll', 'bower', 'sass']);
+    gulp.watch('_scss/*.scss', ['sass']);
 
     // Watch for changes to other files for jekyll compilation
     // Note: This will probably need to be updated with the files you want to watch
     // Second Note: MAKE SURE that the last to items in the watchlist are included or else infinite jekyll loop
-    gulp.watch(['*.html', '*/*.html', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll', 'bower', 'sass']);
-
-    gulp.watch('_site/*.html').on('change', reload);
-
+    gulp.watch(['*.html', '*/*.html', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll']);
 })
 
 
-gulp.task('default', ['jekyll', 'sass', 'bower', 'serve', 'watch']);
+gulp.task('default', ['sass', 'bower', 'jekyll', 'serve', 'watch']);
