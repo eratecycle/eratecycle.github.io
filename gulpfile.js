@@ -53,7 +53,7 @@ gulp.task('watch', function () {
     // Watch for changes to other files for jekyll compilation
     // Note: This will probably need to be updated with the files you want to watch
     // Second Note: MAKE SURE that the last to items in the watchlist are included or else infinite jekyll loop
-    gulp.watch(['*.html', '*/*.html', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll']);
+    gulp.watch(['*.html', '*/*.html', 'js/*.js', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll']);
 })
 
 
