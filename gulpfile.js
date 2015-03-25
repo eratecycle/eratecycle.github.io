@@ -10,7 +10,7 @@ var EXPRESS_ROOT = '_site/'
 
 
 // Run Jekyll Build Asynchronously
-gulp.task('jekyll', ['sass', 'bower'], function () {
+gulp.task('jekyll', ['sass', 'bower', 'scripts'], function () {
     var jekyll = spawn('jekyll', ['build']);
 
     jekyll.on('exit', function (code) {
@@ -40,6 +40,19 @@ gulp.task('bower', function(cb) {
   .pipe(gulp.dest('css'), cb);
 });
 
+gulp.task('scripts', function(cb) {
+  return gulp.src([
+    'bower_components/jquery/dist/*.min.*',
+    'bower_components/pace/*.min.js',
+    'bower_components/bootstrap-sass/assets/javascripts/*.min.js',
+    'bower_components/wow/dist/*.min.js',
+    'bower_components/classie/classie.js',
+    'bower_components/animated-header/js/animated-header.js'
+  ])
+  .pipe(gulp.dest('js/vendor'), cb);
+});
+
+
 // Run static file server
 gulp.task('serve', ['jekyll'], function() {
   browserSync({
@@ -62,4 +75,4 @@ gulp.task('watch', function () {
 })
 
 
-gulp.task('default', ['sass', 'bower', 'jekyll', 'serve', 'watch']);
+gulp.task('default', ['jekyll', 'serve', 'watch']);

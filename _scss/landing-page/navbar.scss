@@ -20,7 +20,7 @@
 /* Flip around the padding for proper display in narrow viewports */
 
 .navbar-default {
-  &.navbar-scroll {
+  &.animated-header-scroll {
     background-color: #fff;
     border-color: #fff;
     padding: 15px 0;
@@ -62,7 +62,7 @@
       color: #fff;
     }
   }
-  &.navbar-scroll .navbar-nav > .active > a:focus {
+  &.animated-header-scroll .navbar-nav > .active > a:focus {
     background: transparent;
     color: inherit;
   }
@@ -83,14 +83,14 @@
   }
 }
 
-.navbar-scroll.navbar-default .nav li a {
+.animated-header-scroll.navbar-default .nav li a {
   color: #676a6c;
   &:hover {
     color: #1ab394;
   }
 }
 
-.navbar-wrapper .navbar.navbar-scroll {
+.navbar-wrapper .navbar.animated-header-scroll {
   padding-top: 0;
   padding-bottom: 5px;
   border-bottom: 1px solid #e7eaec;
@@ -110,16 +110,16 @@
   border-top-color: #18a689;
 }
 
-.navbar-scroll .nav .btn {
+.animated-header-scroll .nav .btn {
   padding: 8px 10px;
   margin-top: 17px;
 }
 
-.navbar-scroll .navbar-nav > li > a {
+.animated-header-scroll .navbar-nav > li > a {
   padding: 20px 10px;
 }
 
-.navbar.navbar-scroll .navbar-brand {
+.navbar.animated-header-scroll .navbar-brand {
   margin-top: 15px;
   border-radius: 5px;
   font-size: 12px;

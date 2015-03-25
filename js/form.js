@@ -1,7 +1,7 @@
 // INSPINIA Form spcific JS
 $(document).ready(function () {
 
-    $('.navbar').addClass('navbar-scroll');
+    $('.navbar').addClass('animated-header-scroll');
 
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
