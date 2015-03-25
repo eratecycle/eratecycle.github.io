@@ -1,0 +1,67 @@
+/* Buttons - only primary custom button
+------------------------- */
+.btn-primary.btn-outline:hover, .btn-success.btn-outline:hover, .btn-info.btn-outline:hover, .btn-warning.btn-outline:hover, .btn-danger.btn-outline:hover {
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #1ab394;
+  border-color: #1ab394;
+  color: #FFFFFF;
+  font-size: 14px;
+  padding: 10px 20px;
+  font-weight: 600;
+  &:hover, &:focus, &:active, &.active {
+    background-color: #18a689;
+    border-color: #18a689;
+    color: #FFFFFF;
+  }
+}
+
+.open .dropdown-toggle.btn-primary {
+  background-color: #18a689;
+  border-color: #18a689;
+  color: #FFFFFF;
+}
+
+.btn-primary {
+  &:active, &.active {
+    background-image: none;
+  }
+}
+
+.open .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.btn-primary {
+  &.disabled {
+    background-color: #1dc5a3;
+    border-color: #1dc5a3;
+    &:hover, &:focus, &:active, &.active {
+      background-color: #1dc5a3;
+      border-color: #1dc5a3;
+    }
+  }
+  &[disabled] {
+    background-color: #1dc5a3;
+    border-color: #1dc5a3;
+    &:hover, &:focus, &:active {
+      background-color: #1dc5a3;
+      border-color: #1dc5a3;
+    }
+  }
+  &.active[disabled] {
+    background-color: #1dc5a3;
+    border-color: #1dc5a3;
+  }
+}
+
+fieldset[disabled] .btn-primary {
+  background-color: #1dc5a3;
+  border-color: #1dc5a3;
+  &:hover, &:focus, &:active, &.active {
+    background-color: #1dc5a3;
+    border-color: #1dc5a3;
+  }
+}
