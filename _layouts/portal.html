@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+  {% include portal/head.html %}
+
+    <body>
+      <div id="wrapper">
+        {% include portal/nav.html %}
+        <div id="page-wrapper" class="gray-bg">
+          {{ content }}
+        </div>
+        {% include portal/footer.html %}
+        {% include js.html %}
+      </div>
+    </body>
+</html>
