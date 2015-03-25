@@ -103,6 +103,16 @@
 
 .nav .btn {
   border-color: #18a689;
+  padding: 8px 10px;
+  margin-top: 22px;
+  border-top: 1px;
+  border-top-style: solid;
+  border-top-color: #18a689;
+}
+
+.navbar-scroll .nav .btn {
+  padding: 8px 10px;
+  margin-top: 17px;
 }
 
 .navbar-scroll .navbar-nav > li > a {
