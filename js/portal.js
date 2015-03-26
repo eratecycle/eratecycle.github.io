@@ -49,11 +49,6 @@ $(document).ready(function () {
     // Fix Bootstrap backdrop issu with animation.css
     $('.modal').appendTo("body")
 
-    // Full height of sidebar
-    function fix_height() {
-        var heightWithoutNavbar = $("body > #wrapper").height() - 61;
-        $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
-    }
     fix_height();
 
     // Fixed Sidebar
@@ -79,13 +74,46 @@ $(document).ready(function () {
     var pageId = $('[data-page]').attr('data-page');
     if (pageId) {
       $('#nav-'+pageId).addClass('active');
-      $('#nav-'+pageId+' a').attr('href', '#page-top');
     }
 
+    initFileUpload();
     showFlotChart();
     showChartJS();
 
 });
+
+// Full height of sidebar
+function fix_height() {
+    var heightWithoutNavbar = $("body > #wrapper").height() - 61;
+    $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
+}
+
+function initFileUpload() {
+  Dropzone.options.myAwesomeDropzone = {
+
+    autoProcessQueue: false,
+    uploadMultiple: true,
+    parallelUploads: 100,
+    maxFiles: 100,
+
+    // Dropzone settings
+    init: function() {
+        var myDropzone = this;
+
+        this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            myDropzone.processQueue();
+        });
+        this.on("sendingmultiple", function() {
+        });
+        this.on("successmultiple", function(files, response) {
+        });
+        this.on("errormultiple", function(files, response) {
+        });
+    }
+  }
+}
 
 function showFlotChart() {
   // flot chart
@@ -96,35 +124,37 @@ function showFlotChart() {
       { label: "Data 1", data: d1, color: '#17a084'},
       { label: "Data 2", data: d2, color: '#127e68' }
   ];
-  $.plot($("#flot-chart1"), data1, {
-      xaxis: {
-          tickDecimals: 0
-      },
-      series: {
-          lines: {
-              show: true,
-              fill: true,
-              fillColor: {
-                  colors: [{
-                      opacity: 1
-                  }, {
-                      opacity: 1
-                  }]
-              },
-          },
-          points: {
-              width: 0.1,
-              show: false
-          },
-      },
-      grid: {
-          show: false,
-          borderWidth: 0
-      },
-      legend: {
-          show: false,
-      }
-  });
+  if ($('#flot-chart1').length > 0) {
+    $.plot($("#flot-chart1"), data1, {
+        xaxis: {
+            tickDecimals: 0
+        },
+        series: {
+            lines: {
+                show: true,
+                fill: true,
+                fillColor: {
+                    colors: [{
+                        opacity: 1
+                    }, {
+                        opacity: 1
+                    }]
+                },
+            },
+            points: {
+                width: 0.1,
+                show: false
+            },
+        },
+        grid: {
+            show: false,
+            borderWidth: 0
+        },
+        legend: {
+            show: false,
+        }
+    });
+  }
 }
 
 function showChartJS() {
@@ -170,9 +200,10 @@ function showChartJS() {
       responsive: true,
   };
 
-
-  var ctx = document.getElementById("lineChart").getContext("2d");
-  var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+  if ($("#lineChart").length > 0) {
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+  }
 }
 
 // For demo purpose - animation css script

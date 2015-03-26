@@ -35,7 +35,9 @@ gulp.task('bower', function(cb) {
   return gulp.src([
     'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
     'bower_components/fontawesome/fonts/*',
-    'bower_components/animate.css/animate.min.css'
+    'bower_components/animate.css/animate.min.css',
+    'bower_components/dropzone/dist/basic.css',
+    'bower_components/dropzone/dist/dropzone.css'
   ], {base: '.'})
   .pipe(gulp.dest('css'), cb);
 });
@@ -57,7 +59,8 @@ gulp.task('scripts', function(cb) {
     'bower_components/flot/jquery.flot.symbol.js',
     'bower_components/flot.curvedlines/curvedLines.js',
     'bower_components/peity/jquery.peity.min.js',
-    'bower_components/chartJs/chartJs.min.js'
+    'bower_components/chartJs/chartJs.min.js',
+    'bower_components/dropzone/dist/dropzone.js'
 
   ])
   .pipe(gulp.dest('js/vendor'), cb);
