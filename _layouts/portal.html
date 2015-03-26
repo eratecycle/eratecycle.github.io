@@ -3,14 +3,16 @@
 
   {% include portal/head.html %}
 
-    <body>
+    <body class="fixed-sidebar">
       <div id="wrapper">
         {% include portal/nav.html %}
         <div id="page-wrapper" class="gray-bg">
+          {% include portal/top-nav.html %}
           {{ content }}
+          {% include portal/footer.html %}
         </div>
-        {% include portal/footer.html %}
-        {% include js.html %}
       </div>
+        {% include js.html %}
+        {% include portal/js.html %}
     </body>
 </html>

@@ -35,19 +35,33 @@ gulp.task('bower', function(cb) {
   return gulp.src([
     'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
     'bower_components/fontawesome/fonts/*',
-    'bower_components/animate.css/animate.min.css'
+    'bower_components/animate.css/animate.min.css',
+    'bower_components/dropzone/dist/basic.css',
+    'bower_components/dropzone/dist/dropzone.css'
   ], {base: '.'})
   .pipe(gulp.dest('css'), cb);
 });
 
 gulp.task('scripts', function(cb) {
   return gulp.src([
-    'bower_components/jquery/dist/*.min.*',
+    'bower_components/jquery/dist/*.min.js',
     'bower_components/pace/*.min.js',
     'bower_components/bootstrap-sass/assets/javascripts/*.min.js',
     'bower_components/wow/dist/*.min.js',
-    'bower_components/classie/classie.js',
-    'bower_components/animated-header/js/animated-header.js'
+    'bower_components/animated-header/js/animated-header.js',
+    'bower_components/metisMenu/dist/*.min.js',
+    'bower_components/slimscroll/*.min.js',
+    'bower_components/flot/jquery.flot.js',
+    'bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js',
+    'bower_components/flot-spline/js/jquery.flot.spline.min.js',
+    'bower_components/flot/jquery.flot.resize.js',
+    'bower_components/flot/jquery.flot.pie.js',
+    'bower_components/flot/jquery.flot.symbol.js',
+    'bower_components/flot.curvedlines/curvedLines.js',
+    'bower_components/peity/jquery.peity.min.js',
+    'bower_components/chartJs/chartJs.min.js',
+    'bower_components/dropzone/dist/dropzone.js'
+
   ])
   .pipe(gulp.dest('js/vendor'), cb);
 });
@@ -71,7 +85,7 @@ gulp.task('watch', function () {
     // Watch for changes to other files for jekyll compilation
     // Note: This will probably need to be updated with the files you want to watch
     // Second Note: MAKE SURE that the last to items in the watchlist are included or else infinite jekyll loop
-    gulp.watch(['*.html', '*/*.html', 'js/*.js', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll']);
+    gulp.watch(['*.html', '**/*.html', 'js/*.js', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll']);
 })
 
 
