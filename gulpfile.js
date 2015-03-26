@@ -48,7 +48,17 @@ gulp.task('scripts', function(cb) {
     'bower_components/wow/dist/*.min.js',
     'bower_components/animated-header/js/animated-header.js',
     'bower_components/metisMenu/dist/*.min.js',
-    'bower_components/slimscroll/*.min.js'
+    'bower_components/slimscroll/*.min.js',
+    'bower_components/flot/jquery.flot.js',
+    'bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js',
+    'bower_components/flot-spline/js/jquery.flot.spline.min.js',
+    'bower_components/flot/jquery.flot.resize.js',
+    'bower_components/flot/jquery.flot.pie.js',
+    'bower_components/flot/jquery.flot.symbol.js',
+    'bower_components/flot.curvedlines/curvedLines.js',
+    'bower_components/peity/jquery.peity.min.js',
+    'bower_components/chartJs/Chart.min.js'
+
   ])
   .pipe(gulp.dest('js/vendor'), cb);
 });

@@ -7,8 +7,9 @@
       <div id="wrapper">
         {% include portal/nav.html %}
         <div id="page-wrapper" class="gray-bg">
+          {% include portal/top-nav.html %}
           {{ content }}
-        {% include portal/footer.html %}
+          {% include portal/footer.html %}
         </div>
       </div>
         {% include js.html %}
