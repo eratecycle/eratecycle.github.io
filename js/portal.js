@@ -75,6 +75,13 @@ $(document).ready(function () {
 
     $("[data-toggle=popover]").popover();
 
+    // highlight active page
+    var pageId = $('[data-page]').attr('data-page');
+    if (pageId) {
+      $('#nav-'+pageId).addClass('active');
+      $('#nav-'+pageId+' a').attr('href', '#page-top');
+    }
+
     showFlotChart();
     showChartJS();
 
