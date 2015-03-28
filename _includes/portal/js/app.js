@@ -1,12 +1,10 @@
 var Backbone = require('backbone');
-var $ = require('jquery');
-Backbone.$ = $;
+Backbone.$ = window.$;
+var composer = require('backbone.composer');
 
 var MainView = require('./views/main');
-var NavView = require('./views/nav');
-var UserModel = require('./models/user');
 
 $(document).ready(function () {
-  var navView = new NavView({el: 'nav', model: new UserModel()});
+  Backbone.View.prototype.attachToTemplate = true;
   var mainView = new MainView({el: 'body'});
 });
