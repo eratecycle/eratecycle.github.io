@@ -3,6 +3,6 @@ var $ = require('jquery');
 
 module.exports = Backbone.View.extend({
   initialize: function(){
-    console.log('it worked');    
+    console.log('it worked');
   }
 });
