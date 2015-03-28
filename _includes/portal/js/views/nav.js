@@ -3,7 +3,6 @@ var header = require('../templates/nav-header.jst');
 
 module.exports = Backbone.View.extend({
   template: require('../templates/nav.jst'),
-  attachToTemplate: true,
 
   initialize: function(){
     var pageId = $('[data-page]').attr('data-page');
