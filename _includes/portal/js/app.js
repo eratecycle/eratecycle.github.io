@@ -6,10 +6,10 @@ var Router = require('./router');
 var MainView = require('./views/main');
 
 Backbone.$ = window.$;
+Backbone.View.prototype.attachToTemplate = true;
 
 $(document).ready(function () {
 
-  Backbone.View.prototype.attachToTemplate = true;
   var mainView = new MainView({el: 'body'});
   var router = new Router();
 
