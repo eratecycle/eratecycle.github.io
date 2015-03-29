@@ -9,7 +9,8 @@ module.exports = Backbone.View.extend({
     'click .navbar-minimalize': 'toggleNavBar'
   },
 
-  toggleNavBar: function() {
+  toggleNavBar: function(e) {
+    e.preventDefault();
     broker.channel('nav').publish('toggle');
   }
 

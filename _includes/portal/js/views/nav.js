@@ -25,6 +25,7 @@ module.exports = Backbone.View.extend({
   },
 
   onShow: function() {
+    // unComment this only when you have a fixed-sidebar
     if ($('body').hasClass('fixed-sidebar')) {
         this.$('.sidebar-collapse').slimScroll({
             height: '100%',
