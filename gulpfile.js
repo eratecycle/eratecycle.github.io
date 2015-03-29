@@ -103,7 +103,7 @@ gulp.task('watch', function () {
     // Manually compile and inject css to avoid jekyll overhead, and utilize livereload injection
     gulp.watch('./_scss/**/*.scss', ['sass']);
 
-    gulp.watch('./_includes/portal/js/**/*.js', ['portal']);
+    gulp.watch('./_includes/portal/js/**', ['portal']);
 
     // Watch for changes to other files for jekyll compilation
     // Note: This will probably need to be updated with the files you want to watch
