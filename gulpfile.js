@@ -79,7 +79,7 @@ gulp.task('portal', function () {
     return b.bundle();
   });
 
-  return gulp.src('_includes/portal/js/app.js')
+  return gulp.src('_includes/portal/js/portal.js')
     .pipe(browserified)
     .pipe(sourcemaps.init({loadMaps: true}))
         // Add transformation tasks to the pipeline here.
