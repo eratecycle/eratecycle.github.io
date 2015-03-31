@@ -5,6 +5,12 @@ var spawn = require('child_process').spawn;
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
+var gutil = require('gulp-util');
+var buffer = require('vinyl-buffer');
+var transform = require('vinyl-transform');
+var uglify = require('gulp-uglify');
+var browserify = require('browserify');
+
 var EXPRESS_PORT = 4000;
 var EXPRESS_ROOT = '_site/'
 
@@ -61,11 +67,26 @@ gulp.task('scripts', function(cb) {
     'bower_components/peity/jquery.peity.min.js',
     'bower_components/chartJs/chartJs.min.js',
     'bower_components/dropzone/dist/dropzone.js'
-
   ])
   .pipe(gulp.dest('js/vendor'), cb);
 });
 
+
+gulp.task('portal', function () {
+  // transform regular node stream to gulp (buffered vinyl) stream
+  var browserified = transform(function(filename) {
+    var b = browserify({entries: filename, debug: true});
+    return b.bundle();
+  });
+
+  return gulp.src('_includes/portal/js/portal.js')
+    .pipe(browserified)
+    .pipe(sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+        .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./js'));
+});
 
 // Run static file server
 gulp.task('serve', ['jekyll'], function() {
@@ -80,7 +101,9 @@ gulp.task('serve', ['jekyll'], function() {
 // Watch for changes
 gulp.task('watch', function () {
     // Manually compile and inject css to avoid jekyll overhead, and utilize livereload injection
-    gulp.watch('_scss/**', ['sass']);
+    gulp.watch('./_scss/**/*.scss', ['sass']);
+
+    gulp.watch('./_includes/portal/js/**', ['portal']);
 
     // Watch for changes to other files for jekyll compilation
     // Note: This will probably need to be updated with the files you want to watch
@@ -89,4 +112,4 @@ gulp.task('watch', function () {
 })
 
 
-gulp.task('default', ['jekyll', 'serve', 'watch']);
+gulp.task('default', ['portal', 'jekyll', 'serve', 'watch']);
