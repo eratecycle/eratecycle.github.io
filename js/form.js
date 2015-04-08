@@ -9,7 +9,7 @@ $(document).ready(function () {
     });
 
     var showError = function(xhr) {
-      var alert = $('.alert');
+      var alert = $('.alert-danger');
       var data = JSON.parse(xhr.responseText);
       if (Array.isArray(data.error.message)) {
         alert.html(data.error.message[0].msg).removeClass('hidden');
@@ -65,6 +65,45 @@ $(document).ready(function () {
           success: function() {
             sessionStorage.setItem('eratecycle', JSON.stringify(creds));
             location.pathname='/portal';
+          },
+          error: showError
+        });
+    });
+
+    $('#forgot-btn').click(function(e){
+        e.preventDefault();
+        hideError();
+
+        $.ajax({
+          type: 'POST',
+          url: '/forgot',
+          dataType: 'json',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            email: $('[name="email"]').val()
+          }),
+          success: function() {
+            $('.alert-success').html('<strong>Success</strong> email has been sent!').removeClass('hidden');
+          },
+          error: showError
+        });
+    });
+
+    $('#reset-btn').click(function(e){
+        e.preventDefault();
+        hideError();
+
+        $.ajax({
+          type: 'POST',
+          url: '/reset/' + location.search.split('=')[1],
+          dataType: 'json',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            password: $('[name="password"]').val(),
+            confirm: $('[name="confirm"]').val()
+          }),
+          success: function() {
+            location.pathname='/login';
           },
           error: showError
         });
