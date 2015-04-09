@@ -1,9 +1,24 @@
 body {
   font-family: $font-stack;
-  background-color: #2f4050;
+  background-color: $nav-bg;
   font-size: 13px;
   color: $text-color;
   overflow-x: hidden;
+
+}
+
+html,body {
+  height: 100%;
+
+}
+
+body.full-height-layout #wrapper,
+body.full-height-layout #page-wrapper {
+  height: 100%;
+}
+
+#page-wrapper {
+  min-height: auto;
 }
 
 body.boxed-layout {
@@ -53,6 +68,8 @@ a:hover, a:focus {
   font-weight: 400;
 }
 
+
+
 .text-uppercase {
   text-transform: uppercase;
 }
@@ -63,8 +80,8 @@ a:hover, a:focus {
 
 .hr-line-dashed {
   border-top: 1px dashed $border-color;
-  color: white;
-  background-color: white;
+  color: #ffffff;
+  background-color: #ffffff;
   height: 1px;
   margin: 20px 0;
 }
@@ -78,8 +95,8 @@ a:hover, a:focus {
 }
 
 video {
-  width: 100% !important;
-  height: auto !important;
+  width: 100%    !important;
+  height: auto   !important;
 }
 
 /* GALLERY */
@@ -102,10 +119,10 @@ video {
 /* MODAL */
 .modal-content {
   background-clip: padding-box;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 4px;
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   outline: 0 none;
   position: relative;
 }
@@ -117,6 +134,7 @@ video {
 .modal-body {
   padding: 20px 30px 30px 30px;
 }
+
 
 .inmodal .modal-body {
   background: #f8fafb;
@@ -147,10 +165,12 @@ video {
   margin-top: 0;
 }
 
+
 /* WRAPPERS */
 
 #wrapper {
   width: 100%;
+  overflow-x: hidden;
 }
 
 .wrapper {
@@ -195,9 +215,11 @@ ul.unstyled, ol.unstyled {
   color: #e5e6e7;
 }
 
+
 /* FOOTER */
 
 .footer {
+
   background: none repeat scroll 0 0 white;
   border-top: 1px solid $border-color;
   bottom: 0;
@@ -213,7 +235,7 @@ ul.unstyled, ol.unstyled {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 10px 20px;
+  padding:10px 20px;
   background: white;
   border-top: 1px solid $border-color;
 }
@@ -224,14 +246,20 @@ ul.unstyled, ol.unstyled {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 10px 20px;
+  padding:10px 20px;
   background: white;
   border-top: 1px solid $border-color;
   margin-left: $sidebar-width;
 }
 
-body.mini-navbar .footer.fixed, body.body-small.mini-navbar .footer.fixed {
+body.mini-navbar .footer.fixed,
+body.body-small.mini-navbar .footer.fixed {
   margin: 0 0 0 70px;
+}
+
+body.mini-navbar.canvas-menu .footer.fixed,
+body.canvas-menu .footer.fixed {
+  margin: 0 !important;
 }
 
 body.fixed-sidebar.body-small.mini-navbar .footer.fixed {
@@ -256,11 +284,11 @@ body.body-small .footer.fixed {
 /* TABLES */
 
 .table-bordered {
-  border: 1px solid #ebebeb;
+  border: 1px solid #EBEBEB;
 }
 
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
-  background-color: #f5f5f6;
+  background-color: #F5F5F6;
   border-bottom-width: 1px;
 }
 
@@ -269,7 +297,7 @@ body.body-small .footer.fixed {
 }
 
 .table > thead > tr > th {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #DDDDDD;
   vertical-align: bottom;
 }
 
@@ -297,7 +325,7 @@ body.body-small .footer.fixed {
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
   background: none;
-  border-color: #dddddd #dddddd rgba(0, 0, 0, 0);
+  border-color: #DDDDDD #DDDDDD rgba(0, 0, 0, 0);
   border-bottom: $gray;
   border-image: none;
   border-style: solid;
@@ -312,7 +340,7 @@ body.body-small .footer.fixed {
 }
 
 .nav-tabs > li > a {
-  color: #a7b1c2;
+  color: #A7B1C2;
   font-weight: 600;
   padding: 10px 20px 10px 25px;
 }
@@ -356,6 +384,20 @@ body.body-small .footer.fixed {
   border-bottom: none;
 }
 
+.border-left{
+  border-left: 1px solid $border-color;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+.border-right {
+  border-left: none;
+  border-right: 1px solid $border-color;
+  border-top: none;
+  border-bottom: none;
+}
+
 .full-width {
   width: 100% !important;
 }
@@ -372,6 +414,7 @@ body.body-small .footer.fixed {
 .link-block a {
   font-size: 10px;
   color: inherit;
+
 }
 
 body.mini-navbar .branding {
@@ -379,13 +422,13 @@ body.mini-navbar .branding {
 }
 
 img.circle-border {
-  border: 6px solid white;
+  border: 6px solid #FFFFFF;
   border-radius: 50%;
 }
 
 .branding {
   float: left;
-  color: white;
+  color: #FFFFFF;
   font-size: 18px;
   font-weight: 600;
   padding: 17px 20px;
@@ -414,6 +457,7 @@ img.circle-border {
 
 .icons-box .infont a {
   padding: 10px;
+
   margin: 1px;
   display: block;
 }
@@ -423,7 +467,7 @@ img.circle-border {
 }
 
 .breadcrumb {
-  background-color: white;
+  background-color: #ffffff;
   padding: 0;
   margin-bottom: 0;
 }
@@ -437,7 +481,7 @@ img.circle-border {
 }
 
 code {
-  background-color: #f9f2f4;
+  background-color: #F9F2F4;
   border-radius: 4px;
   color: #ca4440;
   font-size: 90%;
@@ -450,6 +494,16 @@ code {
   margin-bottom: 25px;
   margin-top: 0;
   padding: 0;
+}
+
+.ibox.collapsed .ibox-content{
+  display: none;
+}
+.ibox.collapsed .fa.fa-chevron-up:before {
+  content: "\f078";
+}
+.ibox.collapsed .fa.fa-chevron-down:before {
+  content: "\f077";
 }
 
 .ibox:after, .ibox:before {
@@ -469,13 +523,14 @@ code {
   color: inherit;
   margin-bottom: 0;
   padding: 14px 15px 7px;
-  height: 48px;
+  min-height: 48px;
 }
 
 .ibox-content {
   background-color: $ibox-content-bg;
   color: inherit;
   padding: 15px 20px 20px 20px;
+
   border-color: $border-color;
   border-image: none;
   border-style: solid solid none;
@@ -555,7 +610,7 @@ table.table-mail tr td {
 }
 
 .ibox-tools a.btn-primary {
-  color: white;
+  color: #fff;
 }
 
 .ibox-tools .dropdown-menu > li > a {
@@ -575,32 +630,32 @@ table.table-mail tr td {
 }
 
 .white-bg {
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .navy-bg {
   background-color: $navy;
-  color: white;
+  color: #ffffff;
 }
 
 .blue-bg {
   background-color: $blue;
-  color: white;
+  color: #ffffff;
 }
 
 .lazur-bg {
   background-color: $lazur;
-  color: white;
+  color: #ffffff;
 }
 
 .yellow-bg {
   background-color: $yellow;
-  color: white;
+  color: #ffffff;
 }
 
 .red-bg {
   background-color: $red;
-  color: white;
+  color: #ffffff;
 }
 
 .black-bg {
@@ -623,7 +678,7 @@ table.table-mail tr td {
 .panel-success > .panel-heading {
   background-color: $blue;
   border-color: $blue;
-  color: white;
+  color: #ffffff;
 }
 
 .panel-info {
@@ -633,7 +688,7 @@ table.table-mail tr td {
 .panel-info > .panel-heading {
   background-color: $lazur;
   border-color: $lazur;
-  color: white;
+  color: #ffffff;
 }
 
 .panel-warning {
@@ -643,7 +698,7 @@ table.table-mail tr td {
 .panel-warning > .panel-heading {
   background-color: $yellow;
   border-color: $yellow;
-  color: white;
+  color: #ffffff;
 }
 
 .panel-danger {
@@ -653,7 +708,7 @@ table.table-mail tr td {
 .panel-danger > .panel-heading {
   background-color: $red;
   border-color: $red;
-  color: white;
+  color: #ffffff;
 }
 
 .progress-bar {
@@ -773,6 +828,58 @@ table.table-mail tr td {
 .EmailView .navbar.navbar-static-top,
 .Inbox .navbar.navbar-static-top {
   background: #fff;
+}
+
+
+a.close-canvas-menu {
+  position: absolute;
+  top:10px;
+  right: 15px;
+  z-index: 1011;
+  color: #a7b1c2;
+}
+
+a.close-canvas-menu:hover {
+  color: #fff;
+}
+
+/* FULL HEIGHT */
+
+
+.full-height {
+  height: 100%;
+}
+
+.fh-breadcrumb {
+  height: calc(100% - 196px);
+  margin: 0 -15px;
+  position: relative
+}
+
+.fh-no-breadcrumb {
+  height: calc(100% - 99px);
+  margin: 0 -15px;
+  position: relative
+}
+
+.fh-column {
+  background: #fff;
+  height: 100%;
+  width: 240px;
+  float: left
+}
+
+.modal-backdrop {
+  z-index: 2040 !important;
+}
+
+.modal {
+  z-index: 2050 !important;
+}
+
+.spiner-example {
+  height: 200px;
+  padding-top: 70px;
 }
 
 /* MARGINS & PADDINGS */
@@ -1091,6 +1198,11 @@ table.table-mail tr td {
 
 // Bootstrap issue in 3.3.0 with modal https://github.com/twbs/bootstrap/issues/9855
 // Fix
-body.modal-open {
-  padding-right: inherit !important;
+body.modal-open { padding-right:inherit !important; }
+
+/* Style correction for Vector Map */
+.jvectormap-zoomin, .jvectormap-zoomout {
+  width: 15px;
+  height: 15px;
+  background: #1ab394;
 }

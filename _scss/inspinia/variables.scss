@@ -14,6 +14,11 @@ $text-color: #676a6c;           // Body text
 $gray: #f3f3f4;                 // Background wrapper color
 $light-gray: #d1dade;           // Default label, badget
 $label-badget-color: #5e5e5e;
+$light-blue: #f3f6fb;
+
+// Spiner color and margin
+$spin-color: $navy;
+$spin-margin: 0 auto;
 
 // IBOX colors ( default panel colors)
 $border-color: #e7eaec;   // IBox border
@@ -25,12 +30,12 @@ $sidebar-width: 220px;
 
 // Boxed layout width
 $boxed-width: 1200px;
-$boxed-backgound: url("patterns/shattered.png");
+$boxed-backgound: image-url("patterns/shattered.png");
 
 //Border radius for buttons
 $btn-border-radius: 3px;
 
 //Navigation
 $nav-bg: #2f4050;
-$nav-profil-pattern: url("patterns/header-profile.png") no-repeat;
+$nav-profil-pattern: image-url("patterns/header-profile.png") no-repeat;
 $nav-text-color: #a7b1c2;

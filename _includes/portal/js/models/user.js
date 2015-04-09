@@ -1,8 +1,14 @@
 var Backbone = require('backbone');
 
-module.exports = Backbone.Model.extend({
+var User = Backbone.Model.extend({
+
+  urlRoot: '/user',
+
   defaults: {
-    name: 'David Williams',
-    
+    firstName: '',
+    lastName: ''
   }
+
 });
+
+module.exports = new User();

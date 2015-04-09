@@ -25,6 +25,15 @@ $(document).ready(function () {
       $('#nav-'+pageId).addClass('active');
       $('#nav-'+pageId+' a').attr('href', '#page-top');
     }
+
+    $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+      if (location.hostname.indexOf('localhost') !== -1) {
+        options.url = 'http://localhost:9010' + options.url;
+      } else {
+        options.url = 'http://eratecycle.herokuapp.com' + options.url;
+      }
+    });
+
 });
 
 // Activate WOW.js plugin for animation on scrol

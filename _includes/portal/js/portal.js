@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var composer = require('backbone.composer');
 var broker = require('backbone.broker');
 
+var user = require('./models/user');
 var Router = require('./router');
 var MainView = require('./views/main');
 
@@ -9,6 +10,33 @@ Backbone.$ = window.$;
 Backbone.View.prototype.attachToTemplate = true;
 
 $(document).ready(function () {
+
+  // send all ajax request to the correct backbend api server
+  $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+    if (location.hostname.indexOf('localhost') !== -1) {
+      options.url = 'http://localhost:9010' + options.url;
+    } else {
+      options.url = 'http://eratecycle.herokuapp.com' + options.url;
+    }
+  });
+
+  // if we get a 401 from any request immediatly log off
+  $(document).ajaxComplete(function(e, xhr, settings) {
+    if (xhr.status == 401) {
+      location.href = '/login';
+    }
+  });
+
+  // add basic auth creds to all ajax requests
+  var creds = sessionStorage.getItem('eratecycle');
+  if (creds) {
+    creds = JSON.parse(creds);
+    $.ajaxSetup({
+      headers: { 'Authorization': 'Basic ' + btoa(creds.email + ':' + creds.password) }
+    });
+  }
+
+  user.fetch();
 
   var mainView = new MainView({el: 'body'});
   var router = new Router();
