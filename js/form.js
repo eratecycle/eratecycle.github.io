@@ -11,10 +11,10 @@ $(document).ready(function () {
     var showError = function(xhr) {
       var alert = $('.alert-danger');
       var data = JSON.parse(xhr.responseText);
-      if (Array.isArray(data.error.message)) {
-        alert.html(data.error.message[0].msg).removeClass('hidden');
-      } else if (data.error.message) {
-        alert.html(data.error.message).removeClass('hidden');
+      if (Array.isArray(data)) {
+        alert.html(data[0].msg).removeClass('hidden');
+      } else if (data.msg) {
+        alert.html(data.msg).removeClass('hidden');
       }
     };
 
