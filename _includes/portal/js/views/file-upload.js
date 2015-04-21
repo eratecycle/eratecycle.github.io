@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var Dropzone = require('dropzone');
 
 var config = require('../config/default');
+var user = require('../models/user');
 
 module.exports = Backbone.View.extend({
 
@@ -38,9 +39,9 @@ module.exports = Backbone.View.extend({
             this.on('sending', function() {
             });
             this.on('success', function(files, response) {
+              user.files.add(response,{merge:true});
             });
-            this.on('complete', function(files, response) {
-              console.log('completed');
+            this.on('complete', function(files) {
             });
             this.on('error', function(files, response) {
               console.log('error');
