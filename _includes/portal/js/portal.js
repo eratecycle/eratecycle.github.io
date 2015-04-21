@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var composer = require('backbone.composer');
 var broker = require('backbone.broker');
 
+var config = require('./config/default');
 var user = require('./models/user');
 var Router = require('./router');
 var MainView = require('./views/main');
@@ -13,11 +14,7 @@ $(document).ready(function () {
 
   // send all ajax request to the correct backbend api server
   $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-    if (location.hostname.indexOf('localhost') !== -1) {
-      options.url = 'http://localhost:9010' + options.url;
-    } else {
-      options.url = 'http://eratecycle.herokuapp.com' + options.url;
-    }
+    options.url = config.apiRoot + options.url;
   });
 
   // if we get a 401 from any request immediatly log off
