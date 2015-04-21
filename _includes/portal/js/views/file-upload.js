@@ -28,14 +28,16 @@ module.exports = Backbone.View.extend({
 
         autoProcessQueue: false,
         uploadMultiple: false,
-        parallelUploads: 10,
-        maxFiles: 10,
+        parallelUploads: 1,
         url: config.apiRoot + '/files',
         headers: { 'Authorization': 'Basic ' + btoa(creds.email + ':' + creds.password) },
 
         // Dropzone settings
         init: function() {
             self.dropzone = this;
+            this.on('processing', function() {
+              this.options.autoProcessQueue = true;
+            });
             this.on('sending', function() {
             });
             this.on('success', function(files, response) {
@@ -44,8 +46,6 @@ module.exports = Backbone.View.extend({
             this.on('complete', function(files) {
             });
             this.on('error', function(files, response) {
-              console.log('error');
-              console.dir(response);
             });
         }
       });
