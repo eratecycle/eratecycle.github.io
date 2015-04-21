@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/eratecycle/eratecycle.github.io",
   "devDependencies": {
-    "browser-sync": "^2.4.0",
+    "browser-sync": "^2.6.4",
     "browserify": "^9.0.3",
     "express": "^4.12.3",
     "gulp": "^3.8.11",
@@ -36,6 +36,7 @@
     "backbone.validator": "^1.1.7",
     "dropzone": "^4.0.1",
     "jquery": "^2.1.3",
+    "moment": "^2.10.2",
     "underscore": "^1.8.2"
   },
   "browserify": {

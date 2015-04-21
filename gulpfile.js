@@ -65,8 +65,7 @@ gulp.task('scripts', function(cb) {
     'bower_components/flot/jquery.flot.symbol.js',
     'bower_components/flot.curvedlines/curvedLines.js',
     'bower_components/peity/jquery.peity.min.js',
-    'bower_components/chartJs/chartJs.min.js',
-    'bower_components/dropzone/dist/dropzone.js'
+    'bower_components/chartJs/chartJs.min.js'
   ])
   .pipe(gulp.dest('js/vendor'), cb);
 });
@@ -91,6 +90,7 @@ gulp.task('portal', function () {
 // Run static file server
 gulp.task('serve', ['jekyll'], function() {
   browserSync({
+    open: false,
     server: {
       baseDir: EXPRESS_ROOT,
       port: EXPRESS_PORT
