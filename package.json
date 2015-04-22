@@ -27,6 +27,7 @@
     "gulp-util": "^3.0.4",
     "node-underscorify": "0.0.14",
     "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
