@@ -6,6 +6,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
 var gutil = require('gulp-util');
+var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var transform = require('vinyl-transform');
 var uglify = require('gulp-uglify');
@@ -17,24 +18,24 @@ var EXPRESS_ROOT = '_site/'
 
 // Run Jekyll Build Asynchronously
 gulp.task('jekyll', ['sass', 'bower', 'scripts'], function () {
-    var jekyll = spawn('jekyll', ['build']);
+  var jekyll = spawn('jekyll', ['build']);
 
-    jekyll.on('exit', function (code) {
-        console.log('-- Finished Jekyll Build --');
-        reload();
-    })
+  jekyll.on('exit', function (code) {
+    console.log('-- Finished Jekyll Build --');
+    reload();
+  })
 });
 
 
 // Compile SASS
 gulp.task('sass', function(cb) {
   return gulp.src('_scss/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('css'))
-    .pipe(gulp.dest('_site/css'))
-    .pipe(reload({stream: true}, cb));
+  .pipe(sourcemaps.init())
+  .pipe(sass())
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest('css'))
+  .pipe(gulp.dest('_site/css'))
+  .pipe(reload({stream: true}, cb));
 });
 
 gulp.task('bower', function(cb) {
@@ -72,34 +73,36 @@ gulp.task('scripts', function(cb) {
 
 
 gulp.task('portal', function () {
-  // transform regular node stream to gulp (buffered vinyl) stream
-  var browserified = transform(function(filename) {
-    var b = browserify({entries: filename, debug: true});
-    return b.bundle();
+  // set up the browserify instance on a task basis
+  var b = browserify({
+    entries: './_includes/portal/js/portal.js',
+    debug: true
   });
 
-  return gulp.src('_includes/portal/js/portal.js')
-    .pipe(browserified)
+  return b.bundle()
+    .pipe(source('portal.js'))
+    .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-        // Add transformation tasks to the pipeline here.
-        .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./js'));
+      // Add transformation tasks to the pipeline here.
+      .pipe(uglify())
+      .on('error', gutil.log)
+    .pipe(sourcemaps.write('./js'))
+    .pipe(gulp.dest('./js/'));
 });
 
-// Run static file server
-gulp.task('serve', ['jekyll'], function() {
-  browserSync({
-    open: false,
-    server: {
-      baseDir: EXPRESS_ROOT,
-      port: EXPRESS_PORT
-    }
+  // Run static file server
+  gulp.task('serve', ['jekyll'], function() {
+    browserSync({
+      open: false,
+      server: {
+        baseDir: EXPRESS_ROOT,
+        port: EXPRESS_PORT
+      }
+    });
   });
-});
 
-// Watch for changes
-gulp.task('watch', function () {
+  // Watch for changes
+  gulp.task('watch', function () {
     // Manually compile and inject css to avoid jekyll overhead, and utilize livereload injection
     gulp.watch('./_scss/**/*.scss', ['sass']);
 
@@ -109,7 +112,7 @@ gulp.task('watch', function () {
     // Note: This will probably need to be updated with the files you want to watch
     // Second Note: MAKE SURE that the last to items in the watchlist are included or else infinite jekyll loop
     gulp.watch(['*.html', '**/*.html', 'js/*.js', '*/*.md', '!_site/**', '!_site/*/**'], ['jekyll']);
-})
+  })
 
 
-gulp.task('default', ['portal', 'jekyll', 'serve', 'watch']);
+  gulp.task('default', ['portal', 'jekyll', 'serve', 'watch']);
