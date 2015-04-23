@@ -1,15 +1,34 @@
 var Backbone = require('backbone');
 var moment = require('moment');
 var _ = require('underscore');
+var accounting = require('accounting');
 
 module.exports = Backbone.View.extend({
 
   template: require('../../templates/dashboard/chart-js.jst'),
 
+  initialize: function(){
+    this.access = _.where(this.model.transactions.toJSON(), {description: 'Access'});
+    this.transport = _.where(this.model.transactions.toJSON(), {description: 'Data Transport'});
+  },
+
+  serializeData: function() {
+    var accessTotal = _.reduce(this.access, function(memo, trans){
+      return memo + trans.amount;
+    }, 0).toFixed(2);
+
+    var transportTotal = _.reduce(this.transport, function(memo, trans){
+      return memo + trans.amount;
+    }, 0).toFixed(2);
+
+    return {
+      totalAccess: accounting.formatMoney(accessTotal),
+      totalTransport: accounting.formatMoney(transportTotal)
+    }
+  },
+
   onShow: function() {
-    var access = _.where(this.model.transactions.toJSON(), {description: 'Access'});
-    var transport = _.where(this.model.transactions.toJSON(), {description: 'Data Transport'});
-    var labels = access.map(function(trans){
+    var labels = this.access.map(function(trans){
       return moment(trans.date).format('MMMM');
     });
 
@@ -24,7 +43,7 @@ module.exports = Backbone.View.extend({
           pointStrokeColor: '#fff',
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
-          data: _.pluck(transport, 'amount')
+          data: _.pluck(this.transport, 'amount')
         },
         {
           label: 'Example dataset',
@@ -34,7 +53,7 @@ module.exports = Backbone.View.extend({
           pointStrokeColor: '#fff',
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(26,179,148,1)',
-          data: _.pluck(access, 'amount')
+          data: _.pluck(this.access, 'amount')
         }
       ]
     };

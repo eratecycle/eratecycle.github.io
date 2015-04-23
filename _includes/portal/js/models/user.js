@@ -23,8 +23,8 @@ var User = Backbone.Model.extend({
       delete data.files;
     }
     if (data.transactions) {
-      this.transactions.add(data.transactions,{merge: true});
-      this.transactions.sort();
+      this.transactions.reset();
+      this.transactions.add(data.transactions);
       delete data.transactions;
     }
     return data;

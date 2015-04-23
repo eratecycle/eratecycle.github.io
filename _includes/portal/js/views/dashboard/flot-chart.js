@@ -1,61 +1,66 @@
 var Backbone = require('backbone');
 var moment = require('moment');
+var _ = require('underscore');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/dashboard/flot-chart.jst'),
+    template: require('../../templates/dashboard/flot-chart.jst'),
 
-  onShow: function() {
-    // flot chart
-    var access = this.model.transactions.where({description: 'Access'});
-    var d1 = access.map(function(model){
-        return [moment(model.get('date')).valueOf(), model.get('amount')];
-    });
+    onShow: function() {
+      var access = this.model.transactions.where({description: 'Access'});
+      var transport = this.model.transactions.where({description: 'Data Transport'});
 
-    var transport = this.model.transactions.where({description: 'Data Transport'});
-    var d2 = transport.map(function(model){
-      return [moment(model.get('date')).valueOf(), model.get('amount')]
-    });
-    // console.dir(d1);
-    // console.dir(d2);
-    // var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
-    // var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+      var accessTotal = _.reduce(access, function(memo, trans){
+        return memo + trans.get('amount');
+      }, 0).toFixed(2);
 
-    var data1 = [
-        { label: 'Data 1', data: d1, color: '#17a084'},
-        { label: 'Data 2', data: d2, color: '#127e68' }
-    ];
-    if ($('#flot-chart1').length > 0) {
-      $.plot($('#flot-chart1'), data1, {
-          xaxis: {
-              tickDecimals: 0
-          },
-          series: {
-              lines: {
-                  show: true,
-                  fill: false,
-                  fillColor: {
-                      colors: [{
-                          opacity: 1
-                      }, {
-                          opacity: 1
-                      }]
-                  },
-              },
-              points: {
-                  width: 0.1,
-                  show: false
-              },
-          },
-          grid: {
-              show: false,
-              borderWidth: 0
-          },
-          legend: {
-              show: false,
-          }
-      });
+      var transportTotal = _.reduce(transport, function(memo, trans){
+        return memo + trans.get('amount');
+      }, 0).toFixed(2);
+
+      var doughnutData = [
+        {
+          value: transportTotal,
+          color:"rgba(220,220,220,0.5)",
+          label: "Data Transport"
+        },
+        {
+          value: accessTotal,
+          color: "rgba(26,179,148,0.5)",
+          label: "Access"
+        }
+      ];
+
+      var doughnutOptions = {
+        //Boolean - Whether we should show a stroke on each segment
+        segmentShowStroke : true,
+
+        //String - The colour of each segment stroke
+        segmentStrokeColor : "#fff",
+
+        //Number - The width of each segment stroke
+        segmentStrokeWidth : 2,
+
+        //Number - The percentage of the chart that we cut out of the middle
+        percentageInnerCutout : 0, // This is 0 for Pie charts
+
+        //Number - Amount of animation steps
+        animationSteps : 100,
+
+        //String - Animation easing effect
+        animationEasing : "easeOutBounce",
+
+        //Boolean - Whether we animate the rotation of the Doughnut
+        animateRotate : true,
+
+        //Boolean - Whether we animate scaling the Doughnut from the centre
+        animateScale : false,
+      };
+
+      if (this.$('#flot-chart-content').length > 0) {
+        var ctx = this.$('#flot-chart-content')[0].getContext('2d');
+        var myNewChart = new Chart(ctx).Pie(doughnutData, doughnutOptions);
+      }
     }
-  }
 
 });
