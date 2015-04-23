@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var TableRowView = require('./table-row');
 
 module.exports = Backbone.View.extend({
 
@@ -7,6 +8,19 @@ module.exports = Backbone.View.extend({
   events: {
     'click .collapse-link': 'collapseIBox',
     'click .close-link': 'close'
+  },
+
+  initialize: function() {
+    this.listenTo(this.collection,'add',this.addItem);
+    this.listenTo(this.collection,'remove',this.removeSubViewForModel);
+    this.collection.forEach(this.addItem, this);
+  },
+
+  addItem: function(model) {
+    this.addSubView({
+      view: new TableRowView({model:model}),
+      selector: 'tbody'
+    });
   },
 
   collapseIBox: function(event) {
@@ -20,7 +34,7 @@ module.exports = Backbone.View.extend({
     ibox.toggleClass('').toggleClass('border-bottom');
     setTimeout(function () {
         ibox.resize();
-        ibox.find('[id^=map-]').resize();
+        ibox.find('[id^=map').resize();
     }, 50);
   },
 
@@ -51,7 +65,5 @@ module.exports = Backbone.View.extend({
     values.push(random);
 
     updatingChart.text(values.join(',')).change();
-
   }
-
 });

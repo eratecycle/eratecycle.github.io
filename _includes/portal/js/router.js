@@ -12,7 +12,7 @@ var nav = broker.channel('nav');
 module.exports = Backbone.Router.extend({
   routes: {
     '': function() {
-      container.publish('show', new DashboardView());
+      container.publish('show', new DashboardView({model: user}));
       nav.publish('select', 'dashboard');
     },
     'file-manager': function() {
