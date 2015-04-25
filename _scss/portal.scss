@@ -29,15 +29,19 @@ $fa-font-path: "/css/bower_components/fontawesome/fonts" !default;
 @import "inspinia/sidebar";
 @import "inspinia/base";
 @import "inspinia/pages";
+@import "inspinia/wizard";
 @import "inspinia/chat";
 @import "inspinia/spinners";
 
 // RTL Support
 @import "inspinia/rtl";
 
+// INSPINIA Skins
+@import "inspinia/skins";
+
 // Media query style
 @import "inspinia/media";
 
 // Custom style
-// Your custom style to override base style
-@import "inspinia/custom";
+// Your custom style to override inspinia style
+//@import "inspinia/custom";

@@ -4,6 +4,7 @@ var broker = require('backbone.broker');
 var DashboardView = require('./views/dashboard');
 var FileUploadView = require('./views/file-upload');
 var FileManagerView = require('./views/file-manager');
+var Form470View = require('./views/form-470');
 
 var user = require('./models/user');
 var container = broker.channel('container');
@@ -20,6 +21,10 @@ module.exports = Backbone.Router.extend({
     'file-manager': function() {
       container.publish('show', new FileManagerView({collection: user.files}));
       nav.publish('select', 'file-manager');
+    },
+    'form-470': function() {
+      container.publish('show', new Form470View({collection: user.files}));
+      nav.publish('select', 'form-470');
     },
     'file-upload': function() {
       container.publish('show', new FileUploadView());
