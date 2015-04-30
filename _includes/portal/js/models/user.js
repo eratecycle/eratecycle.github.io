@@ -7,6 +7,8 @@ var User = Backbone.Model.extend({
 
   urlRoot: '/user',
 
+  idAttribute: '_id',
+
   defaults: {
     firstName: '',
     lastName: ''

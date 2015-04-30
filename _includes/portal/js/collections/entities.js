@@ -1,8 +1,8 @@
 var Backbone = require('backbone');
 
-var File = require('../models/file');
+var Entity = require('../models/entity');
 
 module.exports = Backbone.Collection.extend({
-  model: File,
-  comparator: 'originalname'
+  url: '/entity/search',
+  model: Entity
 });
