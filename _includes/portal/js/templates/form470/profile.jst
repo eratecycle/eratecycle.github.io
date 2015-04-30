@@ -1,25 +1,24 @@
-<h1>Profile</h1>
 <fieldset>
-  <h2>Profile Information</h2>
+  <h2>Applicant Information</h2>
   <div class="row">
     <div class="col-lg-6">
       <div class="form-group">
-        <label>First name *</label>
-        <input id="name" name="name" type="text" class="form-control required">
+        <label>Name *</label>
+        <input id="name" name="name" type="text" value="<%= entity.name %>" class="form-control required">
       </div>
       <div class="form-group">
-        <label>Last name *</label>
-        <input id="surname" name="surname" type="text" class="form-control required">
+        <label>Entity Number *</label>
+        <input id="identifier" name="identifier" type="text" value="<%= entity.identifier %>" class="form-control required">
       </div>
     </div>
     <div class="col-lg-6">
       <div class="form-group">
-        <label>Email *</label>
-        <input id="email" name="email" type="text" class="form-control required email">
+        <label>Street Address *</label>
+        <input id="street" name="street" type="text" class="form-control required email">
       </div>
       <div class="form-group">
-        <label>Address *</label>
-        <input id="address" name="address" type="text" class="form-control">
+        <label>City *</label>
+        <input id="city" name="city" type="text" class="form-control">
       </div>
     </div>
   </div>

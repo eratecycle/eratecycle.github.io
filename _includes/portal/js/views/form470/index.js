@@ -6,53 +6,39 @@ var profileTpl = require('../../templates/form470/profile.jst');
 var warningTpl = require('../../templates/form470/warning.jst');
 var finishTpl = require('../../templates/form470/finish.jst');
 
-var EntitySearch = require('../../collections/entities');
 var EntityTitleView = require('./entity-title');
-var AccountRowView = require('./account-row');
+var EntityView = require('./account');
+var ProfileView = require('./profile');
+var WarningView = require('./warning');
+var FinishView = require('./finish');
 
 module.exports = Backbone.View.extend({
 
   template: require('../../templates/form470/index.jst'),
-  events: {
-    'click #entity-search': 'entitySearch'
-  },
-
   initialize: function() {
-    this.entityCollection = new EntitySearch();
-    this.listenTo(this.entityCollection, 'add', this.addRow);
-    this.listenTo(this.entityCollection, 'remove', this.removeSubViewForModel);
-
     this.addSubView({
       view: new EntityTitleView({model: this.model}),
       selector: '.ibox-content',
       location: 'prepend'
     });
-  },
+    this.entityView = new EntityView({model: this.model});
+    this.profileView = new ProfileView({model: this.model});
+    this.warningView = new WarningView({model: this.model});
+    this.finishView = new FinishView({model: this.model});
 
-  addRow: function(model) {
-    this.addSubView({
-      view: new AccountRowView({model:model, user: this.model}),
-      selector: 'tbody'
-    });
-  },
-
-  entitySearch: function(e) {
-    e.preventDefault();
-    this.model.set('zipCode', this.$('#zipCode').val());
-    this.entityCollection
-    .fetch({
-      data: {
-        zipCode: this.model.get('zipCode')
-      }
-    })
-    .done(_.bind(this.resizeSteps,this));
+    this.listenTo(this.entityView, 'resize', this.resizeSteps);
   },
 
   onRender: function() {
-    this.$('form').append(accountTpl);
-    this.$('form').append(profileTpl);
-    this.$('form').append(warningTpl);
-    this.$('form').append(finishTpl);
+    var form = this.$('form');
+    form.append('<h1>Entity</h1>');
+    form.append(this.entityView.render().el);
+    form.append('<h1>Applicant</h1>');
+    form.append(this.profileView.render().el);
+    form.append('<h1>Warning</h1>');
+    form.append(this.warningView.render().el);
+    form.append('<h1>Finish</h1>');
+    form.append(this.finishView.render().el);
   },
 
   resizeSteps: function() {
@@ -61,7 +47,7 @@ module.exports = Backbone.View.extend({
 
   onShow: function() {
     this.$('form').steps({
-      bodyTag: 'fieldset',
+      bodyTag: 'div',
       onStepChanging: function (event, currentIndex, newIndex)
       {
         // Always allow going backward even if the current step contains invalid fields!
@@ -137,6 +123,8 @@ module.exports = Backbone.View.extend({
         }
       }
     });
+    this.entityView.setElement($('#form-p-0'));
+    this.profileView.setElement($('#form-p-1'));
   }
 
 });
