@@ -35,7 +35,7 @@ module.exports = Backbone.View.extend({
     form.append(this.entityView.render().el);
     form.append('<h1>Applicant</h1>');
     form.append(this.profileView.render().el);
-    form.append('<h1>Warning</h1>');
+    form.append('<h1>Services</h1>');
     form.append(this.warningView.render().el);
     form.append('<h1>Finish</h1>');
     form.append(this.finishView.render().el);

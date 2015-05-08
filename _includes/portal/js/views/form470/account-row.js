@@ -25,6 +25,9 @@ module.exports = Backbone.View.extend({
   },
 
   entitySelected: function() {
+    this.model.fetch().done(function(entity){
+      console.dir(entity);
+    });
     this.user.set('entity', this.model.toJSON());
   }
 
