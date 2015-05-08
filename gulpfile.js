@@ -89,7 +89,7 @@ gulp.task('portal', function () {
       // Add transformation tasks to the pipeline here.
       .pipe(uglify())
       .on('error', gutil.log)
-    .pipe(sourcemaps.write('./js'))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./js/'));
 });
 
