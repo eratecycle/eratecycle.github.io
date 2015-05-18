@@ -9,9 +9,9 @@ exclude: [
 ]
 
 # Site settings
-title: "E-Rate Cycle"
-email: your-email@domain.com
-description: "The TurboTax for ERate."
+title: "ERATECycle"
+email: sales@eratecycle.com
+description: "ERATECycle automates and simplifies the management USAC ERATECycle.  Make ERATE simple, consistent and safe with ERATECycle"
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
