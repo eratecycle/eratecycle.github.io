@@ -28,7 +28,7 @@ layout: default
                 <div class="col-lg-8 features-text wow fadeInLeft">
                     <h1>{{ post.title }}</h1>
                     <p>{{ post.excerpt }}</p>
-                    <a href="" class="btn btn-primary">Learn more</a>
+                    <a href="{{ post.url }}" class="btn btn-primary">Learn more</a>
                 </div>
                 <div class="col-lg-4 features-text text-right wow fadeInRight">
                   <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
@@ -54,7 +54,7 @@ layout: default
               <div class="col-lg-8 features-text wow fadeInRight">
                   <h1>{{ post.title }}</h1>
                   <p>{{ post.excerpt }}</p>
-                  <a href="" class="btn btn-primary">Learn more</a>
+                  <a href="{{ post.url }}" class="btn btn-primary">Learn more</a>
               </div>
           </div>
         </div>
