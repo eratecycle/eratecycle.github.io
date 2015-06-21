@@ -106,4 +106,12 @@ $(document).ready(function () {
           error: showError
         });
     });
+
+    $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+      if (location.hostname.indexOf('localhost') !== -1) {
+        options.url = 'http://localhost:9010' + options.url;
+      } else {
+        options.url = 'http://eratecycle.herokuapp.com' + options.url;
+      }
+    });
 });
