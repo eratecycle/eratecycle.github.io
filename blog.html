@@ -25,16 +25,19 @@ layout: default
     <section class="features">
         <div class="container">
             <div class="row features-block">
-                <div class="col-lg-8 features-text wow fadeInLeft">
+                <div class="col-lg-12 features-text wow fadeInLeft">
                     <h1>{{ post.title }}</h1>
+                    <h3>{{ post.subtitle }}</h3>
                     <p>{{ post.excerpt }}</p>
-                    <a href="" class="btn btn-primary">Learn more</a>
+                    <a href="{{ post.url }}" class="btn btn-primary">Learn more</a>
                 </div>
+                <!--
                 <div class="col-lg-4 features-text text-right wow fadeInRight">
                   <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
                     <img class="img-responsive" src="/img/blog/{{ post.thumbnail }}" alt="">
                   </a>
                 </div>
+              -->
             </div>
         </div>
 
@@ -46,15 +49,17 @@ layout: default
 
         <div class="container">
           <div class="row features-block">
+            <!--
               <div class="col-lg-4 features-text text-left wow fadeInLeft">
                 <a href="#portfolioModal{{ post.modal-id }}" data-toggle="modal">
                   <img class="img-responsive" src="/img/blog/{{ post.thumbnail }}" alt="">
                 </a>
               </div>
-              <div class="col-lg-8 features-text wow fadeInRight">
+            -->
+              <div class="col-lg-12 features-text wow fadeInRight">
                   <h1>{{ post.title }}</h1>
                   <p>{{ post.excerpt }}</p>
-                  <a href="" class="btn btn-primary">Learn more</a>
+                  <a href="{{ post.url }}" class="btn btn-primary">Learn more</a>
               </div>
           </div>
         </div>
@@ -64,3 +69,4 @@ layout: default
     <!-- /.content-section-b -->
     {% endif %}
 {% endfor %}
+{% include testimonials.html %}

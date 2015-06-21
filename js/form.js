@@ -1,8 +1,6 @@
 // INSPINIA Form spcific JS
 $(document).ready(function () {
 
-    $('.navbar').addClass('animated-header-scroll');
-
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
@@ -107,5 +105,13 @@ $(document).ready(function () {
           },
           error: showError
         });
+    });
+
+    $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+      if (location.hostname.indexOf('localhost') !== -1) {
+        options.url = 'http://localhost:9010' + options.url;
+      } else {
+        options.url = 'http://eratecycle.herokuapp.com' + options.url;
+      }
     });
 });
