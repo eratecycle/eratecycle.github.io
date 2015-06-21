@@ -33,11 +33,12 @@ $(document).ready(function () {
     });
   }
 
-  user.fetch();
 
   var mainView = new MainView({el: 'body'});
   var router = new Router();
 
-  broker.start();
-  Backbone.history.start();
+  user.fetch().done(function() {
+    broker.start();
+    Backbone.history.start();    
+  });
 });
