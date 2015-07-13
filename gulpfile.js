@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
 var spawn = require('child_process').spawn;
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
@@ -10,7 +9,9 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var transform = require('vinyl-transform');
 var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('browserify');
+var del = require('del');
 
 var EXPRESS_PORT = 4000;
 var EXPRESS_ROOT = '_site/'
@@ -71,6 +72,13 @@ gulp.task('scripts', function(cb) {
   .pipe(gulp.dest('js/vendor'), cb);
 });
 
+gulp.task('clean', function (cb) {
+  del([
+    'css/*.css',
+    'js/portal.*',
+    '_site'
+  ], cb);
+});
 
 gulp.task('portal', function () {
   // set up the browserify instance on a task basis
@@ -86,7 +94,7 @@ gulp.task('portal', function () {
       // Add transformation tasks to the pipeline here.
       .pipe(uglify())
       .on('error', gutil.log)
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./js/'));
 });
 
