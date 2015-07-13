@@ -11,6 +11,7 @@ var transform = require('vinyl-transform');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('browserify');
+var del = require('del');
 
 var EXPRESS_PORT = 4000;
 var EXPRESS_ROOT = '_site/'
@@ -71,6 +72,13 @@ gulp.task('scripts', function(cb) {
   .pipe(gulp.dest('js/vendor'), cb);
 });
 
+gulp.task('clean', function (cb) {
+  del([
+    'css/*.css',
+    'js/portal.*',
+    '_site'
+  ], cb);
+});
 
 gulp.task('portal', function () {
   // set up the browserify instance on a task basis
