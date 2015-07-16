@@ -3,6 +3,26 @@ Agency Jekyll theme
 
 Agency theme based on [Agency bootstrap theme ](http://startbootstrap.com/templates/agency/)
 
+# Install
+
+## Requirements
+
+- ruby and rubygems installed
+- node.js and npm installed
+- bower installed (`npm install -g bower`)
+
+## Steps
+
+- `gem install jekyll`
+- `gem install jekyll-sitemap`
+- `npm install`
+- `bower install`
+
+## Deploy
+
+- `jekyll serve`
+
+
 # How to use
 
 ###Portfolio 
