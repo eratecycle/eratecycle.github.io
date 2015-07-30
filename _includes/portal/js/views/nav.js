@@ -42,18 +42,22 @@ module.exports = Backbone.View.extend({
   toggleNav: function() {
     $('body').toggleClass('mini-navbar');
 
-    var fadeSideMenu = function() {
+    var fadeInSideMenu = function() {
       this.$('#side-menu').fadeIn(500);
+    }.bind(this);
+
+    var fadeOutSideMenu = function() {
+      this.$('#side-menu').fadeOut(500);
     }.bind(this);
 
     if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
         // Hide menu in order to smoothly turn on when maximize menu
         this.$('#side-menu').hide();
         // For smoothly turn on menu
-        setTimeout(fadeSideMenu, 100);
+        setTimeout(fadeInSideMenu, 100);
     } else if ($('body').hasClass('fixed-sidebar')){
         this.$('#side-menu').hide();
-        setTimeout(fadeSideMenu, 300);
+        setTimeout(fadeOutSideMenu, 300);
     } else {
         // Remove all inline style from jquery fadeIn function to reset menu state
         this.$('#side-menu').removeAttr('style');
