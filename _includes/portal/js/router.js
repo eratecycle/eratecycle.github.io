@@ -11,20 +11,26 @@ var nav = broker.channel('nav');
 
 module.exports = Backbone.Router.extend({
   routes: {
-    '': function() {
-      user.fetch().done(function(){
-        container.publish('show', new DashboardView({model: user}));
-        nav.publish('select', 'dashboard');
-      });
-    },
-    'file-manager': function() {
-      container.publish('show', new FileManagerView({collection: user.files}));
-      nav.publish('select', 'file-manager');
-    },
-    'file-upload': function() {
-      container.publish('show', new FileUploadView());
-      nav.publish('select', 'file-manager');
-    }
+    ''             : 'showDashboard',
+    'file-manager' : 'showFileManager',
+    'file-upload'  : 'showFileUpload'
   },
+
+  showDashboard: function() {
+    user.fetch().done(function(){
+      container.publish('show', new DashboardView({model: user}));
+      nav.publish('select', 'dashboard');
+    });
+  },
+
+  showFileManager: function() {
+    container.publish('show', new FileManagerView({collection: user.files}));
+    nav.publish('select', 'file-manager');
+  },
+
+  showFileUpload: function() {
+    container.publish('show', new FileUploadView());
+    nav.publish('select', 'file-manager');
+  }
 
 });
