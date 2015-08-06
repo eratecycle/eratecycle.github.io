@@ -4,6 +4,9 @@ var broker = require('backbone.broker');
 var DashboardView = require('./views/dashboard');
 var FileUploadView = require('./views/file-upload');
 var FileManagerView = require('./views/file-manager');
+var ProfileView = require('./views/profile');
+var ContactsView = require('./views/contacts');
+var MailboxView = require('./views/mailbox');
 
 var user = require('./models/user');
 var container = broker.channel('container');
@@ -13,7 +16,11 @@ module.exports = Backbone.Router.extend({
   routes: {
     ''             : 'showDashboard',
     'file-manager' : 'showFileManager',
-    'file-upload'  : 'showFileUpload'
+    'file-upload'  : 'showFileUpload',
+    'profile'      : 'showProfile',
+    'contacts'     : 'showContacts',
+    'mailbox'      : 'showMailbox',
+    'notifications': 'showNotifications'
   },
 
   showDashboard: function() {
@@ -31,6 +38,22 @@ module.exports = Backbone.Router.extend({
   showFileUpload: function() {
     container.publish('show', new FileUploadView());
     nav.publish('select', 'file-manager');
+  },
+
+  showProfile: function() {
+    container.publish('show', new ProfileView());
+  },
+
+  showContacts: function() {
+    container.publish('show', new ContactsView());
+  },
+
+  showMailbox: function() {
+    container.publish('show', new MailboxView());
+  },
+
+  showNotifications: function() {
+    container.publish('show', new NotificationsView());
   }
 
 });

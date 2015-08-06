@@ -12,8 +12,8 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.listenTo(this.collection,'add',this.addItem);
-    this.listenTo(this.collection,'remove',this.removeSubViewForModel);
+    this.listenTo(this.collection, 'add', this.addItem);
+    this.listenTo(this.collection, 'remove', this.removeSubViewForModel);
     this.collection.forEach(this.addItem, this);
   },
 
@@ -26,17 +26,23 @@ module.exports = Backbone.View.extend({
 
   clickAllFiles: function(evt) {
     evt.preventDefault();
-    console.log('clickAllFiles');
+    this.$('#files-all').addClass('active');
+    this.$('#files-invoices').removeClass('active');
+    this.$('#files-forms').removeClass('active');
   },
 
   clickInvoices: function(evt) {
     evt.preventDefault();
-    console.log('clickInvoices');
+    this.$('#files-all').removeClass('active');
+    this.$('#files-invoices').addClass('active');
+    this.$('#files-forms').removeClass('active');
   },
 
   clickForms: function(evt) {
     evt.preventDefault();
-    console.log('clickForms');
+    this.$('#files-all').removeClass('active');
+    this.$('#files-invoices').removeClass('active');
+    this.$('#files-forms').addClass('active');
   }
 
 });
