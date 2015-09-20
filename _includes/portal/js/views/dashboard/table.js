@@ -1,4 +1,6 @@
 var Backbone = require('backbone');
+var _ = require('underscore');
+var LocationCollection = require('../../collections/locations');
 var TableRowView = require('./table-row');
 
 module.exports = Backbone.View.extend({
@@ -11,9 +13,16 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function() {
+    this.locations = new LocationCollection();
+    this.listenTo(this.locations, 'add', this.addLocationToSelect);
+
     this.listenTo(this.collection,'add',this.addItem);
     this.listenTo(this.collection,'remove',this.removeSubViewForModel);
     this.collection.forEach(this.addItem, this);
+  },
+
+  onRender: function() {
+    this.locations.fetch();
   },
 
   addItem: function(model) {
@@ -21,6 +30,11 @@ module.exports = Backbone.View.extend({
       view: new TableRowView({model:model}),
       selector: 'tbody'
     });
+  },
+
+  addLocationToSelect: function(model) {
+    var tpl = _.template('<option value="<%=id%>"><%=label%></option>');
+    this.$('#location').append(tpl(model.toJSON()));
   },
 
   collapseIBox: function(event) {
