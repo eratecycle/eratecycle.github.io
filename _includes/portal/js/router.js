@@ -3,6 +3,7 @@ var broker = require('backbone.broker');
 
 var DashboardView = require('./views/dashboard');
 var FileUploadView = require('./views/file-upload');
+var ChargesView = require('./views/charges');
 var FileManagerView = require('./views/file-manager');
 
 var user = require('./models/user');
@@ -16,6 +17,10 @@ module.exports = Backbone.Router.extend({
         container.publish('show', new DashboardView({model: user}));
         nav.publish('select', 'dashboard');
       });
+    },
+    'charges': function() {
+      container.publish('show', new ChargesView({model: user}));
+      nav.publish('select', 'charges');
     },
     'file-manager': function() {
       container.publish('show', new FileManagerView({collection: user.files}));
