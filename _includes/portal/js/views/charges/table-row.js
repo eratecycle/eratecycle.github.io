@@ -3,7 +3,7 @@ var accounting = require('accounting');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/dashboard/table-row.jst'),
+  template: require('../../templates/charges/table-row.jst'),
 
   serializeData: function() {
     var obj = this.model.toJSON();
