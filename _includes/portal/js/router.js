@@ -19,6 +19,8 @@ module.exports = Backbone.Router.extend({
     ''             : 'showDashboard',
     'file-manager' : 'showFileManager',
     'file-upload'  : 'showFileUpload',
+    'filing'       : 'showFilingTool',
+    'charges'      : 'showChargesTool',
     'profile'      : 'showProfile',
     'contacts'     : 'showContacts',
     'mailbox'      : 'showMailbox',
@@ -30,6 +32,16 @@ module.exports = Backbone.Router.extend({
       container.publish('show', new DashboardView({model: user}));
       nav.publish('select', 'dashboard');
     });
+  },
+
+  showFilingTool: function() {
+    container.publish('show', new FilingView({model: user}));
+    nav.publish('select', 'filing');
+  },
+
+  showChargesTool: function() {
+    container.publish('show', new ChargesView({model: user}));
+    nav.publish('select', 'charges');
   },
 
   showFileManager: function() {
