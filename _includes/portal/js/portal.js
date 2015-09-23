@@ -39,6 +39,6 @@ $(document).ready(function () {
 
   user.fetch().done(function() {
     broker.start();
-    Backbone.history.start();    
+    Backbone.history.start();
   });
 });
