@@ -10,6 +10,8 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     this.access = _.where(this.model.transactions.toJSON(), {description: 'Access'});
     this.transport = _.where(this.model.transactions.toJSON(), {description: 'Data Transport'});
+    this.managedServices = _.where(this.model.transactions.toJSON(), {description: 'Managed Services'});
+    this.misc = _.where(this.model.transactions.toJSON(), {description: 'Misc and Equipment Charges'});
   },
 
   serializeData: function() {
@@ -21,9 +23,25 @@ module.exports = Backbone.View.extend({
       return memo + trans.amount;
     }, 0).toFixed(2);
 
+    var managedServicesTotal = _.reduce(this.managedServices, function(memo, trans){
+      return memo + trans.amount;
+    }, 0).toFixed(2);
+
+    var miscTotal = _.reduce(this.misc, function(memo, trans){
+      return memo + trans.amount;
+    }, 0).toFixed(2);
+
+    var overallTotal = +accessTotal + +transportTotal + +managedServicesTotal + +miscTotal;
+
     return {
       totalAccess: accounting.formatMoney(accessTotal),
-      totalTransport: accounting.formatMoney(transportTotal)
+      totalTransport: accounting.formatMoney(transportTotal),
+      totalManagedServices: accounting.formatMoney(managedServicesTotal),
+      totalMisc: accounting.formatMoney(miscTotal),
+      avgAccess: (100 * accessTotal / overallTotal),
+      avgTransport: (100 * transportTotal / overallTotal),
+      avgManagedServices: (100 * managedServicesTotal / overallTotal),
+      avgMisc: (100 * miscTotal / overallTotal)
     }
   },
 
@@ -54,6 +72,26 @@ module.exports = Backbone.View.extend({
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(26,179,148,1)',
           data: _.pluck(this.access, 'amount')
+        },
+        {
+          label: 'Example dataset',
+          fillColor: 'rgba(126,79,148,0.5)',
+          strokeColor: 'rgba(126,79,148,0.7)',
+          pointColor: 'rgba(126,79,148,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(126,79,148,1)',
+          data: _.pluck(this.managedServices, 'amount')
+        },
+        {
+          label: 'Example dataset',
+          fillColor: 'rgba(126,79,48,0.5)',
+          strokeColor: 'rgba(126,79,48,0.7)',
+          pointColor: 'rgba(126,79,48,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(126,79,48,1)',
+          data: _.pluck(this.misc, 'amount')
         }
       ]
     };

@@ -1,15 +1,7 @@
 <div class="ibox float-e-margins">
   <div class="ibox-content">
     <div>
-      <span class="pull-right text-right">
-        <small>Average value of sales in the past month in: <strong>United states</strong></small>
-        <br/>
-        All sales: 162,862
-      </span>
-      <h3 class="font-bold no-margins">
-        Half-year revenue margin
-      </h3>
-      <small>Sales marketing.</small>
+      <h3 class="font-bold no-margins">Monthly Service Billing</h3>
     </div>
 
     <div class="m-t-sm">
@@ -26,30 +18,34 @@
               <h2 class="no-margins"><%= totalAccess %></h2>
               <small>Total Access in period</small>
               <div class="progress progress-mini">
-                <div class="progress-bar" style="width: 48%;"></div>
+                <div class="progress-bar" style="width: <%= avgAccess %>%;"></div>
               </div>
             </li>
             <li>
               <h2 class="no-margins "><%= totalTransport %></h2>
               <small>Total Transport in period</small>
               <div class="progress progress-mini">
-                <div class="progress-bar" style="width: 60%;"></div>
+                <div class="progress-bar" style="width: <%= avgTransport %>%;"></div>
+              </div>
+            </li>
+            <li>
+              <h2 class="no-margins "><%= totalManagedServices %></h2>
+              <small>Total Managed Services in period</small>
+              <div class="progress progress-mini">
+                <div class="progress-bar" style="width: <%= avgManagedServices %>%;"></div>
+              </div>
+            </li>
+            <li>
+              <h2 class="no-margins "><%= totalMisc %></h2>
+              <small>Total Misc and Equipment Charges in period</small>
+              <div class="progress progress-mini">
+                <div class="progress-bar" style="width: <%= avgMisc %>%;"></div>
               </div>
             </li>
           </ul>
         </div>
       </div>
 
-    </div>
-
-    <div class="m-t-md">
-      <small class="pull-right">
-        <i class="fa fa-clock-o"> </i>
-        Update on 16.07.2015
-      </small>
-      <small>
-        <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-      </small>
     </div>
 
   </div>

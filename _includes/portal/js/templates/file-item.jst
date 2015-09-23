@@ -1,6 +1,6 @@
 <div class="file-box">
   <div class="file">
-    <a href="#">
+    <a href="<%= fileNameEncoded %>">
       <span class="corner"></span>
 
       <div class="icon">
@@ -10,6 +10,7 @@
         <%= fileName %>
         <br/>
         <small>Added: <%= dateAdded %></small>
+        <small class="pull-right"><a class="file-remove" href="remove/<%= fileNameEncoded %>">Remove</a></small>
       </div>
     </a>
   </div>
