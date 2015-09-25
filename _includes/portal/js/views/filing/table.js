@@ -2,6 +2,8 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 var ServiceCollection = require('../../collections/services');
 var RateCollection = require('../../collections/service-rates');
+var AverageView = require('./flot-average');
+var TotalView = require('./flot-total');
 var TableRowView = require('./table-row');
 
 module.exports = Backbone.View.extend({
@@ -21,6 +23,16 @@ module.exports = Backbone.View.extend({
     this.charges = new RateCollection();
     this.listenTo(this.charges, 'add', this.addItem);
     this.listenTo(this.charges, 'remove', this.removeSubViewForModel);
+
+    this.addSubView({
+      selector: '#average-chart',
+      view: new AverageView({collection: this.charges})
+    });
+
+    this.addSubView({
+      selector: '#total-chart',
+      view: new TotalView({collection: this.charges})
+    });
   },
 
   onRender: function() {
