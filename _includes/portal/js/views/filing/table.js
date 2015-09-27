@@ -40,14 +40,16 @@ module.exports = Backbone.View.extend({
   },
 
   loadCharges: function(event) {
-    this.charges.fetch({data: {code: parseInt(event.target.value)}});
+    this.charges.fetch({data: {code: event.target.value}});
   },
 
   addItem: function(model) {
-    this.addSubView({
-      view: new TableRowView({model:model}),
-      selector: 'tbody'
-    });
+    if (model.get('rate_type').indexOf('Discount') < 0) {
+      this.addSubView({
+        view: new TableRowView({model:model}),
+        selector: 'tbody'
+      });
+    }
   },
 
   addServiceToSelect: function(model) {

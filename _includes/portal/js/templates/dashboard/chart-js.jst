@@ -14,34 +14,15 @@
         </div>
         <div class="col-md-4">
           <ul class="stat-list m-t-lg">
+          <% _.each(charges, function(item){ %>
             <li>
-              <h2 class="no-margins"><%= totalAccess %></h2>
-              <small>Total Access in period</small>
+              <h2 class="no-margins"><%= item.total %></h2>
+              <small><%= item.label %> in period</small>
               <div class="progress progress-mini">
-                <div class="progress-bar" style="width: <%= avgAccess %>%;"></div>
+                <div class="progress-bar" style="width: <%= item.avg %>%;"></div>
               </div>
             </li>
-            <li>
-              <h2 class="no-margins "><%= totalTransport %></h2>
-              <small>Total Transport in period</small>
-              <div class="progress progress-mini">
-                <div class="progress-bar" style="width: <%= avgTransport %>%;"></div>
-              </div>
-            </li>
-            <li>
-              <h2 class="no-margins "><%= totalManagedServices %></h2>
-              <small>Total Managed Services in period</small>
-              <div class="progress progress-mini">
-                <div class="progress-bar" style="width: <%= avgManagedServices %>%;"></div>
-              </div>
-            </li>
-            <li>
-              <h2 class="no-margins "><%= totalMisc %></h2>
-              <small>Total Misc and Equipment Charges in period</small>
-              <div class="progress progress-mini">
-                <div class="progress-bar" style="width: <%= avgMisc %>%;"></div>
-              </div>
-            </li>
+          <%})%>
           </ul>
         </div>
       </div>

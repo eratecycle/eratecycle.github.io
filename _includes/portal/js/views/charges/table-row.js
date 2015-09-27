@@ -7,10 +7,10 @@ module.exports = Backbone.View.extend({
 
   serializeData: function() {
     var obj = this.model.toJSON();
-    obj.date = obj['INVOICE DATE'];
-    obj.serviceId = obj['SERVICE ID'];
-    obj.description = obj['SERVICE TYPE'];
-    obj.amount = accounting.formatMoney(obj['PREDISCOUNTED CHARGEb']);
+    obj.date = obj.invoice_date;
+    obj.service_id = obj.service_id ? obj.service_id : '';
+    obj.description = obj.service_type;
+    obj.amount = accounting.formatMoney(obj.charge_amount);
     return obj;
   }
 

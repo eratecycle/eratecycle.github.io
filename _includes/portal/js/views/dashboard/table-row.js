@@ -7,7 +7,8 @@ module.exports = Backbone.View.extend({
 
   serializeData: function() {
     var obj = this.model.toJSON();
-    obj.amount = accounting.formatMoney(obj.amount);
+    obj.description = obj.charge_type;
+    obj.amount = accounting.formatMoney(obj.sum);
     return obj;
   }
 
