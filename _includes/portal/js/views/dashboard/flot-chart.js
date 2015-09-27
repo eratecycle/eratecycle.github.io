@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-var moment = require('moment');
 var _ = require('underscore');
 
 module.exports = Backbone.View.extend({

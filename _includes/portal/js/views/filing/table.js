@@ -44,7 +44,8 @@ module.exports = Backbone.View.extend({
   },
 
   addItem: function(model) {
-    if (model.get('rate_type').indexOf('Discount') < 0) {
+    var rate_type = model.get('rate_type');
+    if (rate_type && (rate_type.indexOf('Discount') < 0)) {
       this.addSubView({
         view: new TableRowView({model:model}),
         selector: 'tbody'

@@ -48,8 +48,7 @@ module.exports = Backbone.View.extend({
     }
 
     var labels = _.map(this.charges[0].transactions, function(trans){
-      var date = trans.date.substr(4,2) + '/' + trans.date.substr(6, 2) + '/' + trans.date.substr(0,4);
-      return moment(date).format('MMMM');
+      return moment(trans.date, 'YYYYMMDD').format('MMMM');
     });
 
     var lineData = {
