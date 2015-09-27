@@ -15,9 +15,9 @@ module.exports = Backbone.View.extend({
 
   serializeData: function() {
     return {
-      fileName: this.model.get('originalname'),
-      fileNameEncoded: encodeURIComponent(this.model.get('originalname')),
-      dateAdded: moment(this.model.get('dateAdded')).format('MMM D, YYYY')
+      fileName: this.model.get('file_name'),
+      fileNameEncoded: encodeURIComponent(this.model.get('file_name')),
+      dateAdded: moment(this.model.get('date_added')).format('MMM D, YYYY')
     }
   },
 

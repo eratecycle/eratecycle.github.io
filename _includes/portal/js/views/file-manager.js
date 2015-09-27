@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var FileCollection = require('../collections/files');
 var FileItemView = require('./file-item');
 
 module.exports = Backbone.View.extend({
@@ -12,9 +13,14 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function() {
+    this.collection = new FileCollection();
     this.listenTo(this.collection, 'add', this.addItem);
     this.listenTo(this.collection, 'remove', this.removeSubViewForModel);
     this.collection.forEach(this.addItem, this);
+  },
+
+  onShow: function() {
+    this.collection.fetch();
   },
 
   addItem: function(model) {

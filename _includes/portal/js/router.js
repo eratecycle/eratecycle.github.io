@@ -45,7 +45,7 @@ module.exports = Backbone.Router.extend({
   },
 
   showFileManager: function() {
-    container.publish('show', new FileManagerView({collection: user.files}));
+    container.publish('show', new FileManagerView());
     nav.publish('select', 'file-manager');
   },
 
