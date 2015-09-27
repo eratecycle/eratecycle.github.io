@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 var accounting = require('accounting');
+var moment = require('moment');
 
 module.exports = Backbone.View.extend({
 
@@ -7,7 +8,7 @@ module.exports = Backbone.View.extend({
 
   serializeData: function() {
     var obj = this.model.toJSON();
-    obj.date = obj.invoice_date;
+    obj.date = moment(obj.invoice_date, 'YYYYMMDD').format('MM/DD/YY');
     obj.service_id = obj.service_id ? obj.service_id : '';
     obj.description = obj.service_type;
     obj.amount = accounting.formatMoney(obj.charge_amount);
