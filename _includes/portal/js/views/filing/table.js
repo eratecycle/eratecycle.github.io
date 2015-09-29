@@ -1,10 +1,22 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
+var moment = require('moment');
+
 var ServiceCollection = require('../../collections/services');
 var RateCollection = require('../../collections/service-rates');
+var DateCollection = require('../../collections/invoice-dates');
 var AverageView = require('./flot-average');
 var TotalView = require('./flot-total');
 var TableRowView = require('./table-row');
+
+var FilterModel = Backbone.Model.extend({
+  validate: function(attrs, options) {
+    if (attrs.to_date < attrs.from_date) {
+      console.log('failed validation');
+      return "can't end before it starts";
+    }
+  }
+});
 
 module.exports = Backbone.View.extend({
 
@@ -13,16 +25,28 @@ module.exports = Backbone.View.extend({
   events: {
     'click .collapse-link': 'collapseIBox',
     'click .close-link': 'close',
-    'change #service': 'loadCharges'
+    'change #service_code': 'setFilter',
+    'change #from_date': 'setFilter',
+    'change #to_date': 'setFilter'
   },
 
   initialize: function() {
     this.services = new ServiceCollection();
     this.listenTo(this.services, 'add', this.addServiceToSelect);
 
+    this.dates = new DateCollection();
+    this.listenTo(this.dates, 'add', this.addDateToSelect);
+
     this.charges = new RateCollection();
     this.listenTo(this.charges, 'add', this.addItem);
-    this.listenTo(this.charges, 'remove', this.removeSubViewForModel);
+    this.listenTo(this.charges, 'remove', this.removeItem);
+
+    this.collection = new Backbone.Collection();
+    this.listenTo(this.collection, 'add', this.addViewItem);
+    this.listenTo(this.collection, 'remove', this.removeSubViewForModel);
+
+    this.filter = new FilterModel();
+    this.listenTo(this.filter,'change', this.loadCharges);
 
     this.addSubView({
       selector: '#average-chart',
@@ -35,27 +59,56 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  onRender: function() {
+  onShow: function() {
     this.services.fetch();
+    this.dates.fetch();
   },
 
-  loadCharges: function(event) {
-    this.charges.fetch({data: {code: event.target.value}});
-  },
-
-  addItem: function(model) {
-    var rate_type = model.get('rate_type');
-    if (rate_type && (rate_type.indexOf('Discount') < 0)) {
-      this.addSubView({
-        view: new TableRowView({model:model}),
-        selector: 'tbody'
-      });
+  loadCharges: function(model) {
+    if (this.filter.isValid()) {
+      this.charges.fetch({data: model.toJSON()});
     }
   },
 
   addServiceToSelect: function(model) {
     var tpl = _.template('<option value="<%=id%>"><%=label%></option>');
-    this.$('#service').append(tpl(model.toJSON()));
+    this.$('#service_code').append(tpl(model.toJSON()));
+  },
+
+  setFilter: function(event) {
+    var val = event.target.value;
+    var id = event.target.id;
+    if ((id.indexOf('date') > -1) && (val.length > 0)) {
+      val = moment(val, 'MM/DD/YY').format('YYYYMMDD');
+    }
+    this.filter.set(id, val);
+  },
+
+  addItem: function(model) {
+    var rate_type = model.get('rate_type');
+    if (rate_type && (rate_type.indexOf('Discount') < 0)) {
+      this.collection.add(model);
+    }
+  },
+
+  removeItem: function(model) {
+    this.collection.remove(model);
+  },
+
+  addViewItem: function(model) {
+    this.addSubView({
+      view: new TableRowView({model:model}),
+      selector: 'tbody'
+    });
+  },
+
+  addDateToSelect: function(model) {
+    var tpl = _.template('<option><%=date%></option>');
+    var data = {
+      date: moment(model.get('date'),'YYYYMMDD').format('MM/DD/YY')
+    }
+    this.$('#from_date').append(tpl(data));
+    this.$('#to_date').append(tpl(data));
   },
 
   collapseIBox: function(event) {

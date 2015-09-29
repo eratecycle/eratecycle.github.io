@@ -22,16 +22,19 @@
   <div class="ibox-content">
     <div class="row">
       <div class="col-sm-5 m-b-xs">
-        <select id="service" class="input-sm form-control input-s-sm inline">
+        <select id="service_code" class="input-sm form-control input-s-sm inline">
           <option>Select service</option>
         </select>
       </div>
-      <div class="col-sm-4 m-b-xs">
-        <div data-toggle="buttons" class="btn-group">
-          <label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options">Month</label>
-          <label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options">Qty</label>
-          <label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options">Annual</label>
-        </div>
+      <div class="col-sm-2 m-b-xs">
+        <select id="from_date" class="input-sm form-control input-s-sm inline">
+          <option value="">Select From</option>
+        </select>
+      </div>
+      <div class="col-sm-2 m-b-xs">
+        <select id="to_date" class="input-sm form-control input-s-sm inline">
+          <option value="">Select To</option>
+        </select>
       </div>
       <div class="col-sm-3">
         <div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">

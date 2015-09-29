@@ -3,7 +3,7 @@ var _ = require('underscore');
 var moment = require('moment');
 
 var LocationCollection = require('../../collections/locations');
-var DatesCollection = require('../../collections/invoice_dates');
+var DateCollection = require('../../collections/invoice-dates');
 var ChargeCollection = require('../../collections/charges');
 var TableRowView = require('./table-row');
 
@@ -23,7 +23,7 @@ module.exports = Backbone.View.extend({
     this.locations = new LocationCollection();
     this.listenTo(this.locations, 'add', this.addLocationToSelect);
 
-    this.dates = new DatesCollection();
+    this.dates = new DateCollection();
     this.listenTo(this.dates, 'add', this.addDateToSelect);
 
     this.charges = new ChargeCollection();
@@ -55,24 +55,30 @@ module.exports = Backbone.View.extend({
     this.filter.set(event.target.id, val);
   },
 
-  filterCharges: function() {
+  isValid: function(charge) {
     var from_date = this.filter.get('from_date');
     var to_date = this.filter.get('to_date');
-    var charges = this.charges.filter(function(charge){
-      var date = charge.get('invoice_date');
-      if (from_date && to_date) {
-        return ((date >= from_date)  && (date <= to_date))
-      } else if (!to_date) {
-        return (date >= from_date)
-      } else {
-        return (date <= to_date)
-      }
-    },this);
+    var date = charge.get('invoice_date');
+    if (from_date && to_date) {
+      return ((date >= from_date)  && (date <= to_date))
+    } else if (from_date) {
+      return (date >= from_date)
+    } else if (to_date) {
+      return (date <= to_date)
+    } else {
+      return true;
+    }
+  },
+
+  filterCharges: function() {
+    var charges = this.charges.filter(this.isValid,this);
     this.collection.set(charges);
   },
 
   addItem: function(model) {
-    this.collection.add(model);
+    if (this.isValid(model)) {
+      this.collection.add(model);
+    }
   },
 
   removeItem: function(model) {
