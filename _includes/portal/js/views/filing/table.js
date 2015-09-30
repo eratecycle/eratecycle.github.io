@@ -24,9 +24,7 @@ var FilterModel = Backbone.Model.extend({
   },
 
   validate: function(attrs, options) {
-    console.dir(attrs);
     var result = this.hasRequiredAttr(attrs) && this.isValidDateRange(attrs);
-    console.log(result);
     if (!result) {
       return 'failed validation';
     }

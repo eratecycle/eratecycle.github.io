@@ -16,40 +16,20 @@ module.exports = Backbone.View.extend({
     this.onShow();
   },
 
-  serializeData: function() {
-    var results = {
-      amounts: 0,
-      totals: 0
-    }
-    if (this.model) {
-      results.amounts = this.model.transactions.pluck('amount');
-      results.totals = _.reduce(amounts, function(memo, num){ return memo + num; }, 0).toFixed(2);
-    }
-    results.total = accounting.formatMoney(results.totals);
-    return results;
-  },
-
   onShow: function() {
     var barData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(26,179,148,0.5)",
-                strokeColor: "rgba(26,179,148,0.8)",
-                highlightFill: "rgba(26,179,148,0.75)",
-                highlightStroke: "rgba(26,179,148,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-        ]
+      labels: _.map(this.collection.pluck('rate'),function(rate){
+        return accounting.formatMoney(rate);
+        // return rate.toFixed(2)
+      }),
+      datasets: [{
+        label: "Count By Rate",
+        fillColor: "rgba(26,179,148,0.5)",
+        strokeColor: "rgba(26,179,148,0.8)",
+        highlightFill: "rgba(26,179,148,0.75)",
+        highlightStroke: "rgba(26,179,148,1)",
+        data: this.collection.pluck('count')
+      }]
     };
 
     var barOptions = {
