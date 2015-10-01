@@ -27,6 +27,7 @@ module.exports = Backbone.View.extend({
       result.total = _.reduce(result.transactions, function(memo, trans){
         return memo + trans.sum;
       }, 0);
+      result.total = accounting.formatMoney(result.total);
       return result;
     }, this);
 
