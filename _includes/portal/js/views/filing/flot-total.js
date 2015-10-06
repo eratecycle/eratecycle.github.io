@@ -18,9 +18,8 @@ module.exports = Backbone.View.extend({
 
   onShow: function() {
     var barData = {
-      labels: _.map(this.collection.pluck('rate'),function(rate){
-        return accounting.formatMoney(rate);
-        // return rate.toFixed(2)
+      labels: this.collection.map(function(model){
+        return accounting.formatMoney(model.toJSON().rate);
       }),
       datasets: [{
         label: "Count By Rate",

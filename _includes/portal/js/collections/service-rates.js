@@ -1,7 +1,8 @@
 var Backbone = require('backbone');
-var accounting = require('accounting');
+var ServiceRate = require('../models/service-rate');
 
 module.exports = Backbone.Collection.extend({
   url: '/invoice/service-rates',
-  comparator: 'rate_type'
+  comparator: 'rate_type',
+  model: ServiceRate
 });
