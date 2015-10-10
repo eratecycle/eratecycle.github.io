@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var moment = require('moment');
 var accounting = require('accounting');
 
 module.exports = Backbone.View.extend({
@@ -7,7 +8,9 @@ module.exports = Backbone.View.extend({
 
   serializeData: function() {
     var obj = this.model.toJSON();
-    obj.amount = accounting.formatMoney(obj.amount);
+    obj.date = moment(obj.date, 'YYYYMMDD').format('MM/DD/YY');
+    obj.description = obj.charge_type;
+    obj.amount = accounting.formatMoney(obj.sum);
     return obj;
   }
 

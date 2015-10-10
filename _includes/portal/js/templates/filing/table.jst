@@ -1,0 +1,73 @@
+<div class="ibox float-e-margins">
+  <div class="ibox-title">
+    <h5>Custom responsive table </h5>
+    <div class="ibox-tools">
+      <a class="collapse-link">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-wrench"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-user">
+        <li><a href="#">Config option 1</a>
+        </li>
+        <li><a href="#">Config option 2</a>
+        </li>
+      </ul>
+      <a class="close-link">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <div class="ibox-content">
+    <div class="row">
+      <div class="col-sm-4 m-b-xs">
+        <select id="service_code" class="input-sm form-control input-s-sm inline">
+          <option>Select service</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <select id="rate_type" class="input-sm form-control input-s-sm inline disabled">
+          <option>Select rate</option>
+        </select>
+      </div>
+      <div class="col-sm-2 m-b-xs">
+        <select id="from_date" class="input-sm form-control input-s-sm inline disabled">
+          <option value="">Select From</option>
+        </select>
+      </div>
+      <div class="col-sm-2 m-b-xs">
+        <select id="to_date" class="input-sm form-control input-s-sm inline disabled">
+          <option value="">Select To</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8" id="total-chart"></div>
+      <div class="col-sm-4">
+        <div class="ibox-title">
+            <h5>Supporting Detail</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr class="hidden">
+                  <th>Rate Type</th>
+                  <th>
+                    <div class="text-right">Amount</div>
+                  </th>
+                  <th>
+                    <div class="text-right">Qty</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

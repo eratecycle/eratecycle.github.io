@@ -1,37 +1,42 @@
 var Backbone = require('backbone');
-var _ = require('underscore');
-var accounting = require('accounting');
 
-var TableView = require('./dashboard/table');
-var FlotChartView = require('./dashboard/flot-chart');
-var ChartJSView = require('./dashboard/chart-js');
+var ServiceMonthly  = require('../collections/service-monthly');
+var TableView       = require('./dashboard/table');
+var FlotAverageView = require('./dashboard/flot-average');
+var FlotTotalView   = require('./dashboard/flot-total');
+var FlotChartView   = require('./dashboard/flot-chart');
+var ChartJSView     = require('./dashboard/chart-js');
 
 module.exports = Backbone.View.extend({
 
   template: require('../templates/dashboard.jst'),
 
-  serializeData: function() {
-    var amounts = this.model.transactions.pluck('amount');
-    var totals = _.reduce(amounts, function(memo, num){ return memo + num; }, 0).toFixed(2);
-    return {
-      average: accounting.formatMoney(totals/amounts.length),
-      total: accounting.formatMoney(totals)
-    }
+  initialize: function() {
+    this.collection = new ServiceMonthly();
   },
 
   onShow: function() {
     this.addSubView({
-      view: new TableView({collection: this.model.transactions}),
+      view: new TableView({collection: this.collection}),
       selector: '#table'
     });
     this.addSubView({
-      view: new FlotChartView({model: this.model}),
+      view: new FlotAverageView({collection: this.collection}),
+      selector: '#flot-average'
+    });
+    this.addSubView({
+      view: new FlotTotalView({collection: this.collection}),
+      selector: '#flot-total'
+    });
+    this.addSubView({
+      view: new FlotChartView({collection: this.collection}),
       selector: '#flot-chart'
     });
     this.addSubView({
-      view: new ChartJSView({model: this.model}),
+      view: new ChartJSView({collection: this.collection}),
       selector: '#chart-js'
     });
+    this.collection.fetch();
   }
 
 });

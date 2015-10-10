@@ -1,15 +1,16 @@
 <div class="file-box">
   <div class="file">
-    <a href="#">
+    <a href="<%= fileNameEncoded %>">
       <span class="corner"></span>
 
       <div class="icon">
         <i class="fa fa-file"></i>
       </div>
       <div class="file-name">
-        <%= fileName %>
+        <span style="display:block;overflow: hidden;text-overflow: ellipsis;"><%= fileName %></span>
         <br/>
         <small>Added: <%= dateAdded %></small>
+        <small class="pull-right"><a class="file-remove" href="remove/<%= fileNameEncoded %>">Remove</a></small>
       </div>
     </a>
   </div>

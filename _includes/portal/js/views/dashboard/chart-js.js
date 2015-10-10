@@ -7,29 +7,49 @@ module.exports = Backbone.View.extend({
 
   template: require('../../templates/dashboard/chart-js.jst'),
 
-  initialize: function(){
-    this.access = _.where(this.model.transactions.toJSON(), {description: 'Access'});
-    this.transport = _.where(this.model.transactions.toJSON(), {description: 'Data Transport'});
+  initialize: function() {
+    this.listenTo(this.collection,'sync',this.showChart);
+  },
+
+  showChart: function() {
+    this.render();
+    this.onShow();
   },
 
   serializeData: function() {
-    var accessTotal = _.reduce(this.access, function(memo, trans){
-      return memo + trans.amount;
-    }, 0).toFixed(2);
+    var charges = _.chain(this.collection.toJSON()).pluck('charge_type').unique().value();
 
-    var transportTotal = _.reduce(this.transport, function(memo, trans){
-      return memo + trans.amount;
-    }, 0).toFixed(2);
+    this.charges = _.map(charges, function(charge){
+      var result = {
+        label: charge,
+        transactions: _.where(this.collection.toJSON(),{charge_type: charge}),
+      };
+      result.total = _.reduce(result.transactions, function(memo, trans){
+        return memo + trans.sum;
+      }, 0);
+      result.total = accounting.formatMoney(result.total);
+      return result;
+    }, this);
+
+    var overallTotal = _.reduce(this.charges, function(memo, charge){
+      return memo + charge.total;
+    },0);
 
     return {
-      totalAccess: accounting.formatMoney(accessTotal),
-      totalTransport: accounting.formatMoney(transportTotal)
+      charges: _.map(this.charges, function(charge){
+        charge.avg = (100 * charge.total / overallTotal);
+        return charge;
+      })
     }
   },
 
   onShow: function() {
-    var labels = this.access.map(function(trans){
-      return moment(trans.date).format('MMMM');
+    if (!this.charges || this.charges.length === 0) {
+      return
+    }
+
+    var labels = _.map(this.charges[0].transactions, function(trans){
+      return moment(trans.date, 'YYYYMMDD').format('MMMM');
     });
 
     var lineData = {
@@ -43,7 +63,7 @@ module.exports = Backbone.View.extend({
           pointStrokeColor: '#fff',
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
-          data: _.pluck(this.transport, 'amount')
+          data: _.pluck(this.charges[0].transactions, 'sum')
         },
         {
           label: 'Example dataset',
@@ -53,7 +73,17 @@ module.exports = Backbone.View.extend({
           pointStrokeColor: '#fff',
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(26,179,148,1)',
-          data: _.pluck(this.access, 'amount')
+          data: _.pluck(this.charges[1].transactions, 'sum')
+        },
+        {
+          label: 'Example dataset',
+          fillColor: 'rgba(126,79,148,0.5)',
+          strokeColor: 'rgba(126,79,148,0.7)',
+          pointColor: 'rgba(126,79,148,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(126,79,148,1)',
+          data: _.pluck(this.charges[2].transactions, 'sum')
         }
       ]
     };

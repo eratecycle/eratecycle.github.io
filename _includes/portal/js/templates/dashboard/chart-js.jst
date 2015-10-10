@@ -1,15 +1,7 @@
 <div class="ibox float-e-margins">
   <div class="ibox-content">
     <div>
-      <span class="pull-right text-right">
-        <small>Average value of sales in the past month in: <strong>United states</strong></small>
-        <br/>
-        All sales: 162,862
-      </span>
-      <h3 class="font-bold no-margins">
-        Half-year revenue margin
-      </h3>
-      <small>Sales marketing.</small>
+      <h3 class="font-bold no-margins">Monthly Service Billing</h3>
     </div>
 
     <div class="m-t-sm">
@@ -22,34 +14,19 @@
         </div>
         <div class="col-md-4">
           <ul class="stat-list m-t-lg">
+          <% _.each(charges, function(item){ %>
             <li>
-              <h2 class="no-margins"><%= totalAccess %></h2>
-              <small>Total Access in period</small>
+              <h2 class="no-margins"><%= item.total %></h2>
+              <small><%= item.label %> in period</small>
               <div class="progress progress-mini">
-                <div class="progress-bar" style="width: 48%;"></div>
+                <div class="progress-bar" style="width: <%= item.avg %>%;"></div>
               </div>
             </li>
-            <li>
-              <h2 class="no-margins "><%= totalTransport %></h2>
-              <small>Total Transport in period</small>
-              <div class="progress progress-mini">
-                <div class="progress-bar" style="width: 60%;"></div>
-              </div>
-            </li>
+          <%})%>
           </ul>
         </div>
       </div>
 
-    </div>
-
-    <div class="m-t-md">
-      <small class="pull-right">
-        <i class="fa fa-clock-o"> </i>
-        Update on 16.07.2015
-      </small>
-      <small>
-        <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-      </small>
     </div>
 
   </div>
