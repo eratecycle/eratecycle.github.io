@@ -3,6 +3,7 @@ var broker = require('backbone.broker');
 
 var DashboardView = require('./views/dashboard');
 var FileUploadView = require('./views/file-upload');
+var Form470View = require('./views/form470/index');
 var ChargesView = require('./views/charges');
 var FilingView = require('./views/filing');
 var FileManagerView = require('./views/file-manager');
@@ -17,6 +18,7 @@ var nav = broker.channel('nav');
 module.exports = Backbone.Router.extend({
   routes: {
     ''             : 'showDashboard',
+    'form-470'     : 'showForm470',
     'file-manager' : 'showFileManager',
     'file-upload'  : 'showFileUpload',
     'filing'       : 'showFilingTool',
@@ -32,6 +34,11 @@ module.exports = Backbone.Router.extend({
       container.publish('show', new DashboardView({model: user}));
       nav.publish('select', 'dashboard');
     });
+  },
+
+  showForm470: function() {
+    container.publish('show', new Form470View({model: user}));
+    nav.publish('select', 'form-470');
   },
 
   showFilingTool: function() {
