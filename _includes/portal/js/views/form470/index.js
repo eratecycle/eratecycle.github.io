@@ -1,6 +1,8 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
 
+var Entity = require('../../models/entity');
+
 var accountTpl = require('../../templates/form470/account.jst');
 var profileTpl = require('../../templates/form470/profile.jst');
 var warningTpl = require('../../templates/form470/warning.jst');
@@ -16,6 +18,8 @@ module.exports = Backbone.View.extend({
 
   template: require('../../templates/form470/index.jst'),
   initialize: function() {
+    var entity = new Entity();
+    this.model.set('entity', entity.toJSON());
     this.addSubView({
       view: new EntityTitleView({model: this.model}),
       selector: '.ibox-content',
