@@ -1,5 +1,5 @@
 /*
-    Common
+    Common 
 */
 
 .wizard,
@@ -116,7 +116,7 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #1AB394;
+    background: #2184be;
     color: #fff;
     cursor: default;
 }
