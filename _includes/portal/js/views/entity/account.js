@@ -6,7 +6,7 @@ var AccountRowView = require('./account-row');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/account.jst'),
+  template: require('../../templates/entity/account.jst'),
   attachToTemplate: false,
 
   events: {

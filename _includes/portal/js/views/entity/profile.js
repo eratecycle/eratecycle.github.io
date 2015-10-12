@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/profile.jst'),
+  template: require('../../templates/entity/profile.jst'),
   attachToTemplate: false,
 
   initialize: function() {

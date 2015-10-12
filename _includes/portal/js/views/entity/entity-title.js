@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/entity-title.jst'),
+  template: require('../../templates/entity/entity-title.jst'),
 
   initialize: function() {
     this.listenTo(this.model,'change entity',this.render);

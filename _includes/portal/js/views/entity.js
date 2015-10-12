@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 var accounting = require('accounting');
 
-var TableView = require('./form470/table');
+var TableView = require('./entity/table');
 
 module.exports = Backbone.View.extend({
 

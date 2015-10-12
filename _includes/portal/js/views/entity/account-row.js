@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/account-row.jst'),
+  template: require('../../templates/entity/account-row.jst'),
 
   events: {
     'click': 'rowSelect',

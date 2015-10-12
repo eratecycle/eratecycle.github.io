@@ -3,10 +3,10 @@ var _ = require('underscore');
 
 var Entity = require('../../models/entity');
 
-var accountTpl = require('../../templates/form470/account.jst');
-var profileTpl = require('../../templates/form470/profile.jst');
-var warningTpl = require('../../templates/form470/warning.jst');
-var finishTpl = require('../../templates/form470/finish.jst');
+var accountTpl = require('../../templates/entity/account.jst');
+var profileTpl = require('../../templates/entity/profile.jst');
+var warningTpl = require('../../templates/entity/warning.jst');
+var finishTpl = require('../../templates/entity/finish.jst');
 
 var EntityTitleView = require('./entity-title');
 var EntityView = require('./account');
@@ -16,7 +16,7 @@ var FinishView = require('./finish');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/index.jst'),
+  template: require('../../templates/entity/index.jst'),
   initialize: function() {
     var entity = new Entity();
     this.model.set('entity', entity.toJSON());

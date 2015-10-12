@@ -4,7 +4,7 @@ var moment = require('moment');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/table-row.jst'),
+  template: require('../../templates/entity/table-row.jst'),
 
   serializeData: function() {
     var obj = this.model.toJSON();

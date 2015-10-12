@@ -14,7 +14,7 @@ var container = broker.channel('container');
 
 module.exports = Backbone.View.extend({
 
-  template: require('../../templates/form470/table.jst'),
+  template: require('../../templates/entity/table.jst'),
 
   events: {
     'change #location': 'loadCharges',
