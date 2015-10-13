@@ -33,13 +33,17 @@ module.exports = Backbone.View.extend({
     this.listenTo(this.entityView, 'resize', this.resizeSteps);
   },
 
+  serializeData: function() {
+    return this.model.toJSON();
+  },
+
   onRender: function() {
     var form = this.$('form');
-    form.append('<h1>Entity</h1>');
+    form.append('<h1>Search</h1>');
     form.append(this.entityView.render().el);
-    form.append('<h1>Applicant</h1>');
+    form.append('<h1>Entity</h1>');
     form.append(this.profileView.render().el);
-    form.append('<h1>Services</h1>');
+    form.append('<h1>Contact</h1>');
     form.append(this.warningView.render().el);
     form.append('<h1>Finish</h1>');
     form.append(this.finishView.render().el);

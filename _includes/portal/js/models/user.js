@@ -12,10 +12,7 @@ var User = Backbone.Model.extend({
   defaults: {
     firstName: '',
     lastName: '',
-    entity: {
-      identifier: '',
-      name: ''
-    }
+    entities: []
   },
 
   initialize: function() {

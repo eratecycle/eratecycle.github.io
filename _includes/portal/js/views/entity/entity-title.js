@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 module.exports = Backbone.View.extend({
 
@@ -9,9 +10,12 @@ module.exports = Backbone.View.extend({
   },
 
   serializeData: function() {
-    return {
-      title: this.model.get('entity') ? this.model.get('entity').name : 'Entity'
-    }
+    var defaults = {
+      identifier: '',
+      name: '',
+      contact: ''
+    };
+    return _.extend(defaults, this.model.get('entity'));
   }
 
 });

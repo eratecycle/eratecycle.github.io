@@ -18,9 +18,10 @@ var nav = broker.channel('nav');
 
 module.exports = Backbone.Router.extend({
   routes: {
-    ''             : 'showDashboard',
+    ''             : 'homeRoute',
     'entity/list'  : 'showEntityList',
     'entity/add'   : 'showEntityAdd',
+    'dashboard'    : 'showDashboard',
     'file-manager' : 'showFileManager',
     'file-upload'  : 'showFileUpload',
     'filing'       : 'showFilingTool',
@@ -29,6 +30,14 @@ module.exports = Backbone.Router.extend({
     'contacts'     : 'showContacts',
     'mailbox'      : 'showMailbox',
     'notifications': 'showNotifications'
+  },
+
+  homeRoute: function() {
+    if (user.get('entities') && user.get('entities').length > 0) {
+      this.showEntityList();
+    } else {
+      this.showEntityAdd();
+    }
   },
 
   showDashboard: function() {
